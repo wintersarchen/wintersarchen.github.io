@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="HackPluto">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="HackPluto">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>python下多核，单核CPU对于并行，并发执行效率的对比 · HackPluto&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">HackPluto&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">python下多核，单核CPU对于并行，并发执行效率的对比</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">HackPluto's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/2.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            python下多核，单核CPU对于并行，并发执行效率的对比
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="python,多线程">python,多线程</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/04/19</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><strong>这篇博客主要内容为python 中多线程以及多进程的效率对比，以及记录自己在做这个实验中遇到的一些问题以及心得</strong></p>
+<h1 id="背景引入："><a href="#背景引入：" class="headerlink" title="背景引入："></a>背景引入：</h1><p>CPU制造商为了追求CPU效率放弃了在CPU频率上的追求（CPU频率即CPU单位时间内可以完成任务的多少），反而开始把方向转向了多核CPU上。那么如何在多核CPU上充分发挥出多核的优势就成了一个问题。</p>
+<h1 id="首先是简单介绍下多线程与多进程："><a href="#首先是简单介绍下多线程与多进程：" class="headerlink" title="首先是简单介绍下多线程与多进程："></a>首先是简单介绍下多线程与多进程：</h1><h2 id="线程："><a href="#线程：" class="headerlink" title="线程："></a>线程：</h2><p>是程序执行流的最小单元，是系统独立调度和分配CPU（独立运行）的基本单位。线程(有时被称为轻量级进程)跟进程有些相似，不同的是，所有的线程运行在同一个进程中， 共享相同的运行环境。它们可以想像成是在主进程或“主线程”中并行运行的“迷你进程”。</p>
+<h2 id="进程："><a href="#进程：" class="headerlink" title="进程："></a>进程：</h2><p>是资源分配的基本单位。一个进程包括多个线程。进程(有时被称为重量级进程)是程序的一次 执行。每个进程都有自己的地址空间，内存，数据栈以及其它记录其运行轨迹的辅助数据。操作系 统管理在其上运行的所有进程，并为这些进程公平地分配时间。进程也可以通过 fork 和 spawn 操作 来完成其它的任务。不过各个进程有自己的内存空间，数据栈等，所以只能使用进程间通讯(IPC)， 而不能直接共享信息。<br>说简单点进程就好比QQ，浏览器这些应用程序，而线程就像QQ里和不同的人的聊天窗口或者浏览器中播放的音乐，显示的网页。</p>
+<h2 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h2><p>1.线程与资源分配无关，它属于某一个进程，并与进程内的其他线程一起共享进程的资源。<br>2.每个进程都有自己一套独立的资源（数据），供其内的所有线程共享。<br>3.不论是大小，开销线程要更“轻量级”<br>4.一个进程内的线程通信比进程之间的通信更快速，有效。（因为共享变量）</p>
+<h2 id="测试机："><a href="#测试机：" class="headerlink" title="测试机："></a>测试机：</h2><table><br>    <thead><br>        <tr><br>            <th></th><br>            <th>物理机</th><br>            <th>虚拟机</th><br>        </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td>操作系统</td><br>            <td>macOS</td><br>            <td>Ubuntu16.04</td><br>        </tr><br>        <tr><br>            <td>CPU</td><br>            <td>双核</td><br>            <td>单核</td><br>        </tr><br>        <tr><br>            <td>内存</td><br>            <td>8G</td><br>            <td>2G</td><br>        </tr><br>    </tbody><br></table>
+
+<p>python在管理多线程使用了GIL</p>
+<h2 id="pythonGIL解释："><a href="#pythonGIL解释：" class="headerlink" title="pythonGIL解释："></a>pythonGIL解释：</h2><p>GIL是实现python解释器时引入的一个概念，像C语言一样，python 的解释器也有很多，常见的有CPython，Psyco，PyPy。 而GIL是实现CPyhon时引入的。</p>
+<p>In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)</p>
+<p>GIL的出现是有历史原因的，对于并行和并发这样的多任务，就是为了提高CPU的使用效率，然而需要注意的是，一个CPU一个时间只能实现一个任务，也就是说一个CPU永远不可能并行的，但是可以借助CPU轮训制度频繁切换任务，完成多任务。<br>python在刚创立的时候只考虑到了单核CPU，那么考虑到多线程的数据完整性以及状态同步就需要加一把大锁，所以呢，GIL应运而生。<br>GIL说简单点就是一把大锁，一把有很大权力的锁，一把可以控制CPU的锁，它可以保证一个时间内只能有一个CPU在工作，确保了多线程数据完整性和状态同步，看到这个地方，大家就有疑惑了，那还要多核CPU干什么，都成单核的了。这也确实是GIL局限性的地方。从上面的英文解释中可以看出GIL可</p>
+<p>+以保证线程的安全，刚看到这个概念我有点疑惑，难道操作系统自身的线程调度机制不可以吗，通过查找操作系统的资料我发现，操作系统还真的不可以，下面介绍几种调度算法；<br>1、先到先服务调度算法（FCFS）</p>
+<p>　　根据就绪队列的到达时间来服务，此时就绪队列是一个FIFO队列，先到先服务，后到的线程不能抢占前面正在服务的线程。这种算法的优点是实现简单，缺点也很明显，就是CPU进程区间变化很大时，平均等待时间会变化很大。</p>
+<p>　　2、最短作业优先调度（SJF）</p>
+<p>　　顾名思义，就是CPU进程区间最短的先执行，如果两个进程区间具有同样的长度，那么按照FCFS来调度。</p>
+<p>　　SJF可以是抢占的，也可以是不抢占的。它的平均等待时间优于FCFS。</p>
+<p>　　3、优先级调度</p>
+<p>　　其实上面的SJF算法就是一种特殊的优先级调度，只不过这里的优先级定义更加广泛一些，SJF算法的优先级是按照CPU进程区间长短来定义的，这里的优先级可以是其他的一些定义。</p>
+<p>　　优先级调度可以是抢占的，也可以是非抢占的。</p>
+<p>　　优先级调度的一个主要问题是无穷阻塞（也称为饥饿），如果一个线程的优先级很低，可能需要等待很长的时间才能到这个线程执行，甚至永远不执行，一种解决方法是老化（随着时间的增长，增加线程的优先级）</p>
+<p>　　4、轮转法调度（RR）</p>
+<p>　　轮转法调度专门是为分时系统设计的。它类似于FCFS，但是增加了抢占为了切换线程。定义一个较小的时间单元，称为时间片，通常为10-100ms。为了实现RR算法，将就绪队列保存为FIFO队列，新进程增加到就绪队列队尾，CPU调度程序从就绪队列选择第一个进程，设置定时器在一个时间片之后再中断，再分派这个进程。</p>
+<p>　　如果该进程的CPU区间小于时间片，进程本身就会释放CPU，调度程序继续处理下一个进程，如果当前进程的CPU区间比时间片长，定时器会产生CPU中断，实行上下文切换，然后将此进程放到就绪队列队尾，继续调度就绪队列第一个进程。</p>
+<p>可以看出计算机并不知道代码的具体含义，所以如果代码只是使用数据就没有问题，如果代码要改变数据可能会导致再多线程时数据不同步状态不统一，所以GIL这把锁就可以保证线程的安全。正如上文所说，GIL也确实是一个缺陷无法充分体现出多核的优势，那么我们应该避免这个问题呢：</p>
+<h3 id="1-用其他解析器"><a href="#1-用其他解析器" class="headerlink" title="1.用其他解析器"></a>1.用其他解析器</h3><p>之前也提到了既然GIL只是CPython的产物，那么其他解析器是不是更好呢？没错，像JPython这样的解析器由于实现语言的特性，他们不需要GIL的帮助。然而由于用了Java/C#用于解析器实现，他们也失去了利用社区众多C语言模块有用特性的机会。所以这些解析器也因此一直都比较小众。所以这个方法并不推荐</p>
+<h3 id="2-使用多进程代替多线程"><a href="#2-使用多进程代替多线程" class="headerlink" title="2.使用多进程代替多线程"></a>2.使用多进程代替多线程</h3><p>用multiprocessing替代Thread<br>multiprocessing库的出现很大程度上是为了弥补thread库因为GIL而低效的缺陷。它完整的复制了一套thread所提供的接口方便迁移。唯一的不同就是它使用了多进程而不是多线程。每个进程有自己的独立的GIL，因此也不会出现进程之间的GIL争抢。当然multiprocessing也不是万能良药。它的引入会增加程序实现时线程间数据通讯和同步的困难。multiprocessing由于进程之间无法看到对方的数据，只能通过在主线程申明一个Queue，put再get或者用share memory的方法。这个额外的实现成本使得本来就非常痛苦的多线程程序编码，变得更加痛苦了。但是这仍然是我觉得对于初学者来说最友好的方法了。</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>python中关于线程的使用涉及到threading模块，进程使用涉及multiprocessing模块<br>都只是使用最基本的start，len方法，所以这里不多赘述。<br>直接上代码：<br>需要的第三方库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br></pre></td></tr></table></figure>
+<p>首先是线性执行CPU密集型函数，IO密集型函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义CPU密集型函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    c = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> c &lt; <span class="number">500000</span>:</span><br><span class="line">        c += <span class="number">1</span></span><br><span class="line">        x += x</span><br><span class="line">        y += y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义IO密集型函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span><span class="params">()</span>:</span></span><br><span class="line">    f = open(<span class="string">"test.txt"</span>, <span class="string">"w"</span>)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">500000</span>):</span><br><span class="line">        f.write(<span class="string">"testwrite\n"</span>)</span><br><span class="line">    f.close()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">()</span>:</span></span><br><span class="line">    f = open(<span class="string">"test.txt"</span>, <span class="string">"r"</span>)</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义网络请求函数</span></span><br><span class="line">head_request = &#123;</span><br><span class="line">            <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">"http://www.tieba.com"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">http_request</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = requests.get(url, headers=head_request)</span><br><span class="line">        html = res.text</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">"context"</span>: html&#125;</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">"error"</span>: e&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># CPU密集操作</span></span><br><span class="line">t = time.time()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    count(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">print(<span class="string">"cpu函数运行时间："</span>, time.time() - t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># IO密集操作</span></span><br><span class="line">t = time.time()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    write()</span><br><span class="line">    read()</span><br><span class="line">print(<span class="string">"IO函数运行时间："</span>, time.time() - t)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181030213916836.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20181031004233235.png" alt="在这里插入图片描述"><br>接下来是多线程并发模拟CPU密集型函数`</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义CPU密集型函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    c = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> c &lt; <span class="number">500000</span>:</span><br><span class="line">        c += <span class="number">1</span></span><br><span class="line">        x += x</span><br><span class="line">        y += y</span><br><span class="line">counts = []</span><br><span class="line">t = time.time()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    thread = threading.Thread(target=count, args=(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">    counts.append(thread)</span><br><span class="line">    thread.start()</span><br><span class="line"></span><br><span class="line">e = counts.__len__()    <span class="comment">#这里使用了一个魔术方法，获取counts的长度</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> counts:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.is_alive():</span><br><span class="line">            e -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> e &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span>   <span class="comment"># 当所有线程执行完毕后退出</span></span><br><span class="line">print(time.time() - t)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181030214220157.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20181031003656720.png" alt="在这里插入图片描述"><br>多进程模拟CPU密集型函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义CPU密集型函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    c = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> c &lt; <span class="number">500000</span>:</span><br><span class="line">        c += <span class="number">1</span></span><br><span class="line">        x += x</span><br><span class="line">        y += y</span><br><span class="line">counts = []</span><br><span class="line">t = time.time()</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    process = Process(target=count, args=(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">    counts.append(process)</span><br><span class="line">    process.start()</span><br><span class="line">e = counts.__len__()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> counts:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i.is_alive():</span><br><span class="line">            e -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> e &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">print(time.time() - t)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181030214433830.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20181031003140336.png" alt="在这里插入图片描述"></p>
+<table><br>    <thead><br>        <tr><br>            <th></th><br>            <th>物理机</th><br>            <th>虚拟机</th><br>        </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td>线性执行CPU密集型函数</td><br>            <td>65.29</td><br>            <td>120</td><br>        </tr><br>        <tr><br>            <td>线性执行IO密集型函数</td><br>            <td>1.76</td><br>            <td>1.6</td><br>        </tr><br>        <tr><br>            <td>多线程并发模拟CPU密集型函数</td><br>            <td>65.92</td><br>            <td>132.58</td><br>        </tr><br>         <tr><br>            <td>多进程并行模拟CPU密集型函数</td><br>            <td>38.87</td><br>            <td>127.9</td><br>        </tr><br>    </tbody><br></table>
+
+<p>通过上面的表格进行数据对比，明显发现在多核的情况下，python的多进程要比多线程快得多。那么是为什么呢，这里就要说到python的多线程管理机制，在python3.x中，GIL使用计时器（执行时间达到阈值后，当前线程释放GIL）对线程进行管理，这样对CPU密集型程序更加友好，但依然没有解决GIL导致的同一时间只能执行一个线程的问题，所以效率依然不尽如人意。而且在多核的情况下可能在进程调度轮训的过程中还会产生CPU的竞争会产生更加坏的效果。</p>
+<p>#GIL即全局解释器锁<br>然而对于IO密集型函数或者网络请求函数，多线程就是友好地，因为可以利用函数的挂起空闲时间进行线程的转换，充分利用到了多核CPU的优势。<br>在单核的情况下，模拟的多进程并行的效率也是优于多线程并发的。<br>Liunx多线程pthread初探：<a href="https://blog.csdn.net/xuanandting/article/details/78842795" target="_blank" rel="noopener">https://blog.csdn.net/xuanandting/article/details/78842795</a></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/04/19/title/">http://yoursite.com/2019/04/19/title/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/04/19/title/">April 19th 2019, 11:34:12 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/04/19/title/">April 19th 2019, 11:40:06 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/04/19/title-1/" title="sqli-labs 通关详解">
+                    <div class="nextTitle">sqli-labs 通关详解</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/04/16/hello-world/" title="HackPluto's Blog">
+                    <div class="prevTitle">HackPluto's Blog</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:turing0day@gmail.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/HackPluto" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景引入："><span class="toc-number">1.</span> <span class="toc-text">背景引入：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#首先是简单介绍下多线程与多进程："><span class="toc-number">2.</span> <span class="toc-text">首先是简单介绍下多线程与多进程：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程："><span class="toc-number">2.1.</span> <span class="toc-text">线程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程："><span class="toc-number">2.2.</span> <span class="toc-text">进程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别："><span class="toc-number">2.3.</span> <span class="toc-text">区别：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试机："><span class="toc-number">2.4.</span> <span class="toc-text">测试机：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pythonGIL解释："><span class="toc-number">2.5.</span> <span class="toc-text">pythonGIL解释：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-用其他解析器"><span class="toc-number">2.5.1.</span> <span class="toc-text">1.用其他解析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用多进程代替多线程"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.使用多进程代替多线程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码实现"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 3
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/title-1/">sqli-labs 通关详解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/title/">python下多核，单核CPU对于并行，并发执行效率的对比</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href="/2019/04/16/hello-world/">HackPluto's Blog</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
+    
+        <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="python"><span class="iconfont-archer">&#xe60a;</span>python</span>
+    
+        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "HackPluto"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
