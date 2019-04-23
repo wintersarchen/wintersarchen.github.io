@@ -346,24 +346,24 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/title-1/">
+        <a class="abstract-title" href="/2019/04/23/title-2/">
             
-                <span>sqli-labs 通关详解</span>
+                <span>自己动手写工具（1）--Netcat</span>
         </a>
         <div class="abstract-content">
-             CTF-web学习笔记之 sqli-labs第一关：第一关如图首先可以判断这里接受的是一个GET请求，先在1后面加一个’ 发现报错，说明这里没有过滤掉引号，所以这里是一个注入点SQL注入通常有两种类型，整形注入和字符型注入，那么判断这里是哪种注入就要分析这里的报错语句，报错信息中共有5个单引号，”实际上是两个单引号，最外面的两个是报错信息的提示引号，’1’两边的引号是后台代码的引号，多出来的就是我们加上的，因为这里给输入的1加上了引号所以后台接受的是字符型，那么我们在后续的注入中需要加 ‘ 来闭合后面的引号
-接下来需要判断表中有几列，通常使用order by加数字 1 2 3 4 5一...
+            一直以来都是在用别人写好的工具，为了锻炼自己的编程能力以及更加深刻的理解网络，所以我准备做一个长期的写工具计划。第一个工具呢就是仿照一个类似于netcat的网络连接工具Pdao，netcat被称为网络界的“瑞士军刀”，功能十分丰富，我的工具参考了NC的功能，主要有如下几种功能：1.服务端的监听2.上传文件3.反弹shell4.下载文件
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/23</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,sql注入">ctf,web,sql注入</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,Netcat">工具,python,Netcat</a>
     
 </div>
             
