@@ -401,9 +401,9 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="获取IP地址"><a href="#获取IP地址" class="headerlink" title="获取IP地址"></a>获取IP地址</h2><p>首先拿到一个网址做信息收集的时候，第一步就是获得目标服务器的IP地址，这个是我们进行进一步社工或者渗透的基础。<br>查询IP的网站有很多，我常用的比如 <a href="http://ping.chinaz.com，http://whois.chinaz.com，都可以做域名的DNS解析，但是一些网站为了增加访问速度以及隐藏真正的IP地址会做CDN，CDN就是一个网站的一个文本缓存服务器，我们通常直接访问到的就是CDN服务器，那么如何判断对方网站是不是做了CDN呢，常用的方法比如多地PING，域名解析，我在这里给大家演示一下多地ping的方法，这个方法借助一些在线的平台比如" target="_blank" rel="noopener">http://ping.chinaz.com，http://whois.chinaz.com，都可以做域名的DNS解析，但是一些网站为了增加访问速度以及隐藏真正的IP地址会做CDN，CDN就是一个网站的一个文本缓存服务器，我们通常直接访问到的就是CDN服务器，那么如何判断对方网站是不是做了CDN呢，常用的方法比如多地PING，域名解析，我在这里给大家演示一下多地ping的方法，这个方法借助一些在线的平台比如</a> ，<a href="https://asm.ca.com/en/ping.php/" target="_blank" rel="noopener">https://asm.ca.com/en/ping.php/</a><br>   <a href="http://ping.chinaz.com/" target="_blank" rel="noopener">http://ping.chinaz.com/</a><br><img src="/images/t4/1.png" alt="在这里插入图片描述"><br><img src="/images/t4/2.png" alt="在这里插入图片描述"></p>
-<p>进一步查询这个IP<br><img src="/images/t4/3.png" alt="在这里插入图片描述"><br>查询这个IP归属地<br><img src="/images/t4/4.png" alt="在这里插入图片描述"><br>通过以上的综合分析发现对于这个域名解析出了多个IP地址而且域名归属地是CDN公司所以这个网站使用了CDN，那么在对方使用了CDN的情况下如何获取真正的IP地址呢<br>1.子域名查询，一些网站只会对一些业务做CDN所以我们可以对其子域名入手<br>常用的网站有<a href="https://dnsdb.io/zh-cn/,这里我更推荐使用工具比如layer" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/,这里我更推荐使用工具比如layer</a> 子域名挖掘机因为工具可以人为的添加字典，增加爆破的正确性。<br>这个网站我使用工具爆破了下并没有发现其他子域名，所以这个方法行不通。<br>2.查询历史IP<br>网站的CDN的部署通常不是一蹴而就的，所以我们可以尝试查询该网站的历史IP从而找到他之前的真正IP，常用的网站有 <a href="http://site.ip138.com/" target="_blank" rel="noopener">http://site.ip138.com/</a><br>通过网站的查询<br><img src="/images/t4/5.png" alt="在这里插入图片描述"><br>对最后一个IP进行进一步的查询<br><img src="/images/t4/6.png" alt="在这里插入图片描述"><br>所以这里初步确定该网站IP为110.173.58.<strong>*<br>接着在微步上查询该IP曾解析过的历史域名<br><img src="/images/t4/7.png" alt="在这里插入图片描述"><br>使用微步可视化可得到如下图形<br><img src="/images/t4/8.png" alt="在这里插入图片描述"><br>发现一个域名为<a href="http://www.shee*" target="_blank" rel="noopener">www.shee*</a>*</strong>l.com 的网站和我们收集信息的网站曾经两次都解析到两个IP，访问<a href="http://www.shee****l.com发现页面和我们收集的页面一摸一样，分析两个网页的注册时间" target="_blank" rel="noopener">www.shee****l.com发现页面和我们收集的页面一摸一样，分析两个网页的注册时间</a></p>
-<p><img src="/images/t4/10.png" alt="在这里插入图片描述"><br>我初步猜测是w<strong>*.com这个页面先注册了一段时间后因为业务上的拓展或者是发现原先的服务器不好用，又购买了s**</strong>这个域名并且解析到了台湾的IDC服务器上，所以现在的真是IP是台湾服务器的可能性更大些。<br>查询这个IP<br><img src="/images/t4/11.png" alt="在这里插入图片描述"></p>
+        <h2 id="获取IP地址"><a href="#获取IP地址" class="headerlink" title="获取IP地址"></a>获取IP地址</h2><p>首先拿到一个网址做信息收集的时候，第一步就是获得目标服务器的IP地址，这个是我们进行进一步社工或者渗透的基础。<br>查询IP的网站有很多，我常用的比如 <a href="http://ping.chinaz.com，http://whois.chinaz.com，都可以做域名的DNS解析，但是一些网站为了增加访问速度以及隐藏真正的IP地址会做CDN，CDN就是一个网站的一个文本缓存服务器，我们通常直接访问到的就是CDN服务器，那么如何判断对方网站是不是做了CDN呢，常用的方法比如多地PING，域名解析，我在这里给大家演示一下多地ping的方法，这个方法借助一些在线的平台比如" target="_blank" rel="noopener">http://ping.chinaz.com，http://whois.chinaz.com，都可以做域名的DNS解析，但是一些网站为了增加访问速度以及隐藏真正的IP地址会做CDN，CDN就是一个网站的一个文本缓存服务器，我们通常直接访问到的就是CDN服务器，那么如何判断对方网站是不是做了CDN呢，常用的方法比如多地PING，域名解析，我在这里给大家演示一下多地ping的方法，这个方法借助一些在线的平台比如</a> ，<a href="https://asm.ca.com/en/ping.php/" target="_blank" rel="noopener">https://asm.ca.com/en/ping.php/</a><br>   <a href="http://ping.chinaz.com/" target="_blank" rel="noopener">http://ping.chinaz.com/</a><br><img src="../images/t4/1.png" alt="在这里插入图片描述"><br><img src="../images/t4/2.png" alt="在这里插入图片描述"></p>
+<p>进一步查询这个IP<br><img src="../images/t4/3.png" alt="在这里插入图片描述"><br>查询这个IP归属地<br><img src="../images/t4/4.png" alt="在这里插入图片描述"><br>通过以上的综合分析发现对于这个域名解析出了多个IP地址而且域名归属地是CDN公司所以这个网站使用了CDN，那么在对方使用了CDN的情况下如何获取真正的IP地址呢<br>1.子域名查询，一些网站只会对一些业务做CDN所以我们可以对其子域名入手<br>常用的网站有<a href="https://dnsdb.io/zh-cn/,这里我更推荐使用工具比如layer" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/,这里我更推荐使用工具比如layer</a> 子域名挖掘机因为工具可以人为的添加字典，增加爆破的正确性。<br>这个网站我使用工具爆破了下并没有发现其他子域名，所以这个方法行不通。<br>2.查询历史IP<br>网站的CDN的部署通常不是一蹴而就的，所以我们可以尝试查询该网站的历史IP从而找到他之前的真正IP，常用的网站有 <a href="http://site.ip138.com/" target="_blank" rel="noopener">http://site.ip138.com/</a><br>通过网站的查询<br><img src="../images/t4/5.png" alt="在这里插入图片描述"><br>对最后一个IP进行进一步的查询<br><img src="../images/t4/6.png" alt="在这里插入图片描述"><br>所以这里初步确定该网站IP为110.173.58.<strong>*<br>接着在微步上查询该IP曾解析过的历史域名<br><img src="../images/t4/7.png" alt="在这里插入图片描述"><br>使用微步可视化可得到如下图形<br><img src="../images/t4/8.png" alt="在这里插入图片描述"><br>发现一个域名为<a href="http://www.shee*" target="_blank" rel="noopener">www.shee*</a>*</strong>l.com 的网站和我们收集信息的网站曾经两次都解析到两个IP，访问<a href="http://www.shee****l.com发现页面和我们收集的页面一摸一样，分析两个网页的注册时间" target="_blank" rel="noopener">www.shee****l.com发现页面和我们收集的页面一摸一样，分析两个网页的注册时间</a></p>
+<p><img src="../images/t4/10.png" alt="在这里插入图片描述"><br>我初步猜测是w<strong>*.com这个页面先注册了一段时间后因为业务上的拓展或者是发现原先的服务器不好用，又购买了s**</strong>这个域名并且解析到了台湾的IDC服务器上，所以现在的真是IP是台湾服务器的可能性更大些。<br>查询这个IP<br><img src="../images/t4/11.png" alt="在这里插入图片描述"></p>
 
     </article>
     <!-- license  -->
@@ -412,7 +412,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/04/28/title-4/">http://yoursite.com/2019/04/28/title-4/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/04/28/title-4/">April 28th 2019, 12:54:36 am</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/04/28/title-4/">April 29th 2019, 3:48:09 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/04/28/title-4/">April 29th 2019, 4:02:46 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -552,6 +552,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
