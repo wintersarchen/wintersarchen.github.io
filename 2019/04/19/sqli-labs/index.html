@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.5k</span>阅读时长: <span class="post-count reading-time">8 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.5k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -438,9 +438,8 @@ height:50vh;
 <p><strong>第十三关</strong><br><img src="https://s2.ax1x.com/2019/05/22/VpVmB4.png" alt="在这里插入图片描述"><br>通过报错信息可以构造如下的闭合方式，<br><img src="https://s2.ax1x.com/2019/05/22/VpVnHJ.png" alt="在这里插入图片描述"><br>这一关同样是只有正确和错误两种显示，没有数据回显，所以联想到第五关的双查询注入，构造如下payload<br>uname=1&amp;passwd=1’) union select count(<em>),concat(‘</em>‘,(select database()),’<em>‘,floor(rand(0)</em>2))a from information_schema.columns group by a #</p>
 <p><strong>第二十关</strong><br>什么是cookie:<br>cookie是服务器给客户端的一种加密凭证，通常由客户端存储在本地，比如客户A访问 XXXX.com，网页给了客户A一个123的凭证，客户B也去访问那个网址，网站给B一个456的凭证，以后A和B去访问那个网站的时候只要加上了那个凭证网站就可以把两个人分开了。</p>
 <p>cookie注入：<br>在一些网站的开发中，有的程序员为了方便会写这样的代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID = Request(<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>而request会接受来自GET，POST，COOKIE的参数而我们有时候就会忽略对于cookie的过滤<br><img src alt><br>输入admin admin 进行登陆，看到返回的页面中提到了cookie的信息，使用bp改包<br>修改cookie的值<br><img src alt><br>先加一个单引号引起报错说明这里存在注入点，判断列数为3<br><img src alt><br>由于这里没有回显信息所以使用报错注入，参考前面的报错注入语句<br><img src alt></p>
-<p>这里再介绍一个语句   extractvalue(1,concat(0x7e,(select @@version),0x7e))<br><a href="https://www.cnblogs.com/xishaonian/p/6250444.html" target="_blank" rel="noopener">https://www.cnblogs.com/xishaonian/p/6250444.html</a></p>
-<p><strong>第二十一关</strong><br><img src="https://img-blog.csdnimg.cn/20190223100219285.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/05/22/VpZJGq.png" alt><br>而request会接受来自GET，POST，COOKIE的参数而我们有时候就会忽略对于cookie的过滤<br><img src="https://s2.ax1x.com/2019/05/22/VpZlZQ.png" alt><br>输入admin admin 进行登陆，看到返回的页面中提到了cookie的信息，使用bp改包<br>修改cookie的值<br><img src="https://s2.ax1x.com/2019/05/22/VpZMqg.png" alt><br><img src="https://s2.ax1x.com/2019/05/22/VpZuM8.png" alt><br>先加一个单引号引起报错说明这里存在注入点，判断列数为3<br><img src="https://s2.ax1x.com/2019/05/22/VpZmxf.png" alt><br>由于这里没有回显信息所以使用报错注入，参考前面的报错注入语句<br><img src="https://s2.ax1x.com/2019/05/22/VpZKsS.png" alt></p>
+<p>这里再介绍一个语句   extractvalue(1,concat(0x7e,(select @@version),0x7e))<br><a href="https://www.cnblogs.com/xishaonian/p/6250444.html" target="_blank" rel="noopener">https://www.cnblogs.com/xishaonian/p/6250444.html</a><br><img src="https://s2.ax1x.com/2019/05/22/VpZUMT.png" alt><br><strong>第二十一关</strong><br><img src="https://s2.ax1x.com/2019/05/22/VpZGin.png" alt><br>发现数据被base64加密<br><img src="https://s2.ax1x.com/2019/05/22/VpZ1aj.png" alt><br>所以我们在进行注入的时候需要将语句先进行base64加密<br>判断注入点<br><img src="https://s2.ax1x.com/2019/05/22/VpZ3Is.png" alt><br>构造payload<br><img src="https://s2.ax1x.com/2019/05/22/VpZYR0.png" alt></p>
 
     </article>
     <!-- license  -->
@@ -449,7 +448,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/04/19/sqli-labs/">http://yoursite.com/2019/04/19/sqli-labs/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/04/19/sqli-labs/">April 19th 2019, 11:44:13 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/04/19/sqli-labs/">May 22nd 2019, 1:15:59 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/04/19/sqli-labs/">May 22nd 2019, 9:43:05 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -706,8 +705,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 10
@@ -789,9 +786,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
     
-        <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
-    
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
     
