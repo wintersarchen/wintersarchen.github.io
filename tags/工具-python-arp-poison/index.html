@@ -346,25 +346,26 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/python下多核/">
+        <a class="abstract-title" href="/2019/05/27/自己动手写工具(3)--ARP欺骗/">
             
-                <span>python下多核，单核CPU对于并行，并发执行效率的对比</span>
+                <span>自己动手写工具(3)--ARP欺骗</span>
         </a>
         <div class="abstract-content">
-            这篇博客主要内容为python 中多线程以及多进程的效率对比，以及记录自己在做这个实验中遇到的一些问题以及心得
-背景引入：CPU制造商为了追求CPU效率放弃了在CPU频率上的追求（CPU频率即CPU单位时间内可以完成任务的多少），反而开始把方向转向了多核CPU上。那么如何在多核CPU上充分发挥出多核的优势就成了一个问题。
-首先是简单介绍下多线程与多进程：线程：是程序执行流的最小单元，是系统独立调度和分配CPU（独立运行）的基本单位。线程(有时被称为轻量级进程)跟进程有些相似，不同的是，所有的线程运行在同一个进程中， 共享相同的运行环境。它们可以想像成是在主进程或“主线程”中并行运行的“迷...
+            最近在计网里学习了ARP协议，为了加深理解，所以决定自己写一个ARP的欺骗工具（有的地方也可以翻译成ARP投毒）。
+##ARP协议首先介绍一下ARP协议的定义，先看一下网络的结构模型
+
+ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路层还是网络层是众说纷纭所以不必纠结这个地方。在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP/IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/27</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="python,多线程">python,多线程</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,arp_poison">工具,python,arp_poison</a>
     
 </div>
             

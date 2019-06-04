@@ -346,25 +346,55 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/python下多核/">
+        <a class="abstract-title" href="/2019/06/04/windows2018R2读书笔记/">
             
-                <span>python下多核，单核CPU对于并行，并发执行效率的对比</span>
+                <span>windows2018R2读书笔记</span>
         </a>
         <div class="abstract-content">
-            这篇博客主要内容为python 中多线程以及多进程的效率对比，以及记录自己在做这个实验中遇到的一些问题以及心得
-背景引入：CPU制造商为了追求CPU效率放弃了在CPU频率上的追求（CPU频率即CPU单位时间内可以完成任务的多少），反而开始把方向转向了多核CPU上。那么如何在多核CPU上充分发挥出多核的优势就成了一个问题。
-首先是简单介绍下多线程与多进程：线程：是程序执行流的最小单元，是系统独立调度和分配CPU（独立运行）的基本单位。线程(有时被称为轻量级进程)跟进程有些相似，不同的是，所有的线程运行在同一个进程中， 共享相同的运行环境。它们可以想像成是在主进程或“主线程”中并行运行的“迷...
+            最近在学习内网渗透，发现自己对于这个方向之前有很大的误解，以为用工具扫扫就可以了，没有深入的理解，所以决定从原理上学习Windows的域控。我这次读的书是《Windows Server 2008 R2 Active Directory配置指南》。由于时间有限我只读以下章节：
+第1章  Active Directory域服务（AD DS）第2章  建立AD DS域第3章  域用户与组账户的管理第8章  管理域和林信任第10章  操作主机的管理。下面就是我对一些重要概念的理解，以及自己实践的记录。
+#第一章 Active Directory域服务1.1 AD域服务概述Directory Se...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="python,多线程">python,多线程</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="windows,域控,内网渗透">windows,域控,内网渗透</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/06/02/Linux下的iptables详解/">
+            
+                <span>Linux下的iptables详解</span>
+        </a>
+        <div class="abstract-content">
+            最近在写DNS欺骗的小工具，突然遇到了Linux下的iptables，之前没有听过这个，所以专门查了这方面的知识，在这里做一个整理。
+##防火墙的概念从逻辑上讲。防火墙可以大体分为主机防火墙和网络防火墙。主机防火墙：针对于单个主机进行防护。网络防火墙：往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。网络防火墙和主机防火墙并不冲突，可以理解为，网络防火墙主外（集体）， 主机防火墙主内（个人）。从物理上讲，防火墙可以分为硬件防火墙和软件防火墙。硬件防火墙：在硬件级别实现部分防火墙功能，另一部分功能基于软件实现，性能高，成本高。软件防火墙：应用软件处理逻辑运行于通...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="防火墙,iptables">防火墙,iptables</a>
     
 </div>
             
