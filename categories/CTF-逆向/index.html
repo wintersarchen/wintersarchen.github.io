@@ -346,54 +346,26 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/05/10/CTF中的编码总结/">
+        <a class="abstract-title" href="/2019/06/12/2019看雪CTF逆向Q1writeup/">
             
-                <span>CTF中的编码总结</span>
+                <span>2019看雪CTF逆向Q1writeup</span>
         </a>
         <div class="abstract-content">
-            这段时间做的web题比较多，遇到了很多编码的题，所以这里总结一下web方向常用到的编码知识
-1.URL编码首先当我们要去学习一个编码的时候需要知道为什么这里需要编码，通常我们编码的原因是：压缩传输，避免敏感信息泄漏，避免引起歧义等。URL编码顾名思义就是在URL里的编码，为什么要使用URL编码主要是为了避免引起歧义，比如我们在发送GET请求时 /?a=123&amp;b=234 这里我们传递了两个整数给变量a,b，看似没有问题，如果我们要传递的数据里有？或者&amp;就会引起歧义，浏览器就不知道怎么解析了，所以引入了URL编码，将会引起歧义的地方换成URL编码。URL编码也叫百分号编码，...
+            第一题 流浪者首先使用die查壳后没有发现壳拖到IDA里这个题我本来想直接看伪C代码发现找关键点函数有些困难（还是我太菜了），所以最后发现了更简单的方法shifr + F12查看字符串
+
+发现了一串可疑字符串查看这串字符串的引用 进入这个函数
+其实看到strcmp函数的时候，这个题的意图就比较明显了，就是比较str1和那一串字符串是不是相等，变量a1应该就是数组的首地址，但是我们不知道a1这个数组是怎么得到的，所以查一下sub_4017F0函数的交叉引用从16行的getbuffer可以看出str是直接从内存中读取的也就是我们输入的这里限制了输入的必须是大小写字母或者数字所以直接暴力破解1...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/10</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/12</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,编码">ctf,web,编码</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/sqli-labs/">
-            
-                <span>sqli-labs 通关详解</span>
-        </a>
-        <div class="abstract-content">
-             CTF-web学习笔记之 sqli-labs第一关：第一关如图首先可以判断这里接受的是一个GET请求，先在1后面加一个’ 发现报错，说明这里没有过滤掉引号，所以这里是一个注入点SQL注入通常有两种类型，整形注入和字符型注入，那么判断这里是哪种注入就要分析这里的报错语句，报错信息中共有5个单引号，”实际上是两个单引号，最外面的两个是报错信息的提示引号，’1’两边的引号是后台代码的引号，多出来的就是我们加上的，因为这里给输入的1加上了引号所以后台接受的是字符型，那么我们在后续的注入中需要加 ‘ 来闭合后面的引号
-接下来需要判断表中有几列，通常使用order by加数字 1 2 3 4 5一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,sql注入">ctf,web,sql注入</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="逆向,CTF">逆向,CTF</a>
     
 </div>
             
@@ -492,6 +464,16 @@
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -825,15 +807,17 @@
     
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
         <span class="sidebar-tag-name" data-tags="windows,域控,内网渗透"><span class="iconfont-archer">&#xe606;</span>windows,域控,内网渗透</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
-    
         <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
     
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
     
@@ -841,9 +825,9 @@
     
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
     
-        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
@@ -886,15 +870,17 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
+        <span class="sidebar-category-name" data-categories="CTF-逆向"><span class="iconfont-archer">&#xe60a;</span>CTF-逆向</span>
+    
+        <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
     
         <span class="sidebar-category-name" data-categories="Linux"><span class="iconfont-archer">&#xe60a;</span>Linux</span>
     
         <span class="sidebar-category-name" data-categories="内网渗透"><span class="iconfont-archer">&#xe60a;</span>内网渗透</span>
     
-        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
-    
         <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
+    
+        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
     
         <span class="sidebar-category-name" data-categories="ACM"><span class="iconfont-archer">&#xe60a;</span>ACM</span>
     
