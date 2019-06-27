@@ -346,12 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/06/28/算法设计课程重要例题代码/">
+            
+                <span>算法设计课程重要例题代码</span>
+        </a>
+        <div class="abstract-content">
+            123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="算法设计">算法设计</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/06/13/攻防世界逆向入门writeup/">
             
                 <span>攻防世界逆向入门writeup</span>
         </a>
         <div class="abstract-content">
-            
+            1.re1这个题方法挺多的，我主要介绍两种1 逆向分析法：拖入IDA后，进入main函数，反汇编看伪C代码简单的分析下整个函数，输入字符串v9，再比较v5,v9,如果不相等就输出 aFlag,相等就输出 unk_413E90。
+
+分别点进这两个内存查看内容
+
+发现这两个地方都不是flag,所以我认为这个题不是输出flag,而是看我们的输入是不是flag,所以跟踪v5字符串对 _mm_storeu_si128() 函数进行进一步分析，这个是intel的一个指令，简而言之就是将参数里后面的直接赋值给前面，所以直接查看 xmmword_413E34 找到了flag
+2 查找字符串：因为我...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -359,6 +393,12 @@
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/13</span>
             </div>
             <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="XCTF,逆向">XCTF,逆向</a>
+    
+</div>
             
         </div>
     </article>
@@ -430,12 +470,16 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/10/2014火眼恶意代码逆向分析wp/">
+        <a class="abstract-title" href="/2019/06/10/2018火眼恶意代码逆向分析wp/">
             
-                <span>2014火眼恶意代码逆向分析wp</span>
+                <span>2018火眼恶意代码逆向分析wp</span>
         </a>
         <div class="abstract-content">
-            Challenge 1
+            Challenge 1发现是一个jar文件，那就说明这个题是一个java的反汇编，Java的好处就是你可以直接看到源码，所以分析起来就容易一些。使用Java的反汇编工具jd-gui
+直接看到源码，代码逻辑很简单，拿到flag
+
+‘GoldenTicket2018@flare-on.com’
+
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -599,35 +643,6 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="动态规划(DP)">动态规划(DP)</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/22/素数个数求解与素数的判定/">
-            
-                <span>素数个数求解与素数的判定</span>
-        </a>
-        <div class="abstract-content">
-            1.素数质数（Prime number），又称素数，指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数（也可定义为只有1与该数本身两个正因数的数）。对于写代码的人来说，素数比想像中的更重要，Google一下BigPrime或者big_prime你总会发现大堆大堆用到了素数常量的程序代码。平时没事时可以记一些素数下来以 备急用。我会选一些好记的素数，比如4567, 124567, 3214567, 23456789, 55566677, 1234567894987654321, 11111111111111111111111 (23个1)。   　　素数有很多神奇的性质。我...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="概率法求素数,算法">概率法求素数,算法</a>
     
 </div>
             
@@ -960,9 +975,14 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     
     
     
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -975,6 +995,11 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href="/2019/06/28/算法设计课程重要例题代码/">算法设计课程重要例题代码</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -993,7 +1018,7 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/10</span><a class="archive-post-title" href="/2019/06/10/2014火眼恶意代码逆向分析wp/">2014火眼恶意代码逆向分析wp</a>
+            <span class="archive-post-date">06/10</span><a class="archive-post-title" href="/2019/06/10/2018火眼恶意代码逆向分析wp/">2018火眼恶意代码逆向分析wp</a>
         </li>
     
     
@@ -1018,22 +1043,22 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
         </li>
     
     
@@ -1083,9 +1108,11 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     
         <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
-    
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
+    
+        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
+    
+        <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
         <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
     
@@ -1096,6 +1123,8 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
         <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
     
@@ -1136,7 +1165,7 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF-逆向"><span class="iconfont-archer">&#xe60a;</span>CTF-逆向</span>
+        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
     
         <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
     
@@ -1146,13 +1175,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
     
-        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
-    
         <span class="sidebar-category-name" data-categories="ACM"><span class="iconfont-archer">&#xe60a;</span>ACM</span>
+    
+        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
     
         <span class="sidebar-category-name" data-categories="BlackHatTools"><span class="iconfont-archer">&#xe60a;</span>BlackHatTools</span>
     
         <span class="sidebar-category-name" data-categories="python"><span class="iconfont-archer">&#xe60a;</span>python</span>
+    
+        <span class="sidebar-category-name" data-categories="CTFweb"><span class="iconfont-archer">&#xe60a;</span>CTFweb</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

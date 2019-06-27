@@ -264,9 +264,15 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="XCTF,逆向">XCTF,逆向</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">0</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.1k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -395,7 +401,41 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h2 id="1-re1"><a href="#1-re1" class="headerlink" title="1.re1"></a>1.re1</h2><p>这个题方法挺多的，我主要介绍两种<br>1 逆向分析法：<br>拖入IDA后，进入main函数，反汇编看伪C代码<br>简单的分析下整个函数，输入字符串v9，再比较v5,v9,如果不相等就输出 aFlag,相等就输出 unk_413E90。</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfe5sx.png" alt></p>
+<p>分别点进这两个内存查看内容</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfe4Q1.png" alt></p>
+<p>发现这两个地方都不是flag,所以我认为这个题不是输出flag,而是看我们的输入是不是flag,所以跟踪v5字符串<br>对 _mm_storeu_si128() 函数进行进一步分析，这个是intel的一个指令，简而言之就是将参数里后面的直接赋值给前面，所以直接查看 xmmword_413E34 找到了flag<br><img src="https://s2.ax1x.com/2019/06/13/VfefzR.png" alt></p>
+<p>2 查找字符串：<br>因为我们看到这个题没有计算或者加密flag，所以猜测这个题可以直接搜索程序中的字符串，我也发现很多大佬做题也喜欢上来就搜索字符串，通常都可以找到一些线索。<br>搜索字符串可以使用IDA自带的shift+F12,也可以使用strings工具，这个工具也很简单，直接在CMD中输入strings 加文件名就好了，最后可以找到falg</p>
+<h2 id="2-game"><a href="#2-game" class="headerlink" title="2.game"></a>2.game</h2><p>进入IDA，进入main函数，反汇编<br><img src="https://s2.ax1x.com/2019/06/13/VfQui8.png" alt></p>
+<p>这个题就是不断的输入v1然后各种判断，各种操作，其实这些不必要深究，继续往下看</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/VfQedP.png" alt></p>
+<p>这里又是一波判断，然后如果都为真就进入下面的函数，我敏锐的察觉到这个调用的函数不简单<br>进入这个函数看看<br>这个地方就是对字符串v2进行修改然后输出，所以我们直接把这一段伪C变成python脚本跑出来就好了</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/VfQZZt.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">18</span>,<span class="number">64</span>,<span class="number">98</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">48</span>,<span class="number">49</span>,<span class="number">65</span>,<span class="number">32</span>,<span class="number">12</span>,<span class="number">48</span>,<span class="number">65</span>,<span class="number">31</span>,<span class="number">78</span>,<span class="number">62</span>,<span class="number">32</span>,<span class="number">49</span>,<span class="number">32</span>,<span class="number">1</span>,<span class="number">57</span>,<span class="number">96</span>,<span class="number">3</span>,<span class="number">21</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">62</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">44</span>,<span class="number">65</span>,<span class="number">78</span>,<span class="number">32</span>,<span class="number">16</span>,<span class="number">97</span>,<span class="number">54</span>,<span class="number">16</span>,<span class="number">44</span>,<span class="number">52</span>,<span class="number">32</span>,<span class="number">64</span>,<span class="number">89</span>,<span class="number">45</span>,<span class="number">32</span>,<span class="number">65</span>,<span class="number">15</span>,<span class="number">34</span>,<span class="number">18</span>,<span class="number">16</span>,<span class="number">0</span>] </span><br><span class="line">b=[<span class="number">123</span>,<span class="number">32</span>,<span class="number">18</span>,<span class="number">98</span>,<span class="number">119</span>,<span class="number">108</span>,<span class="number">65</span>,<span class="number">41</span>,<span class="number">124</span>,<span class="number">80</span>,<span class="number">125</span>,<span class="number">38</span>,<span class="number">124</span>,<span class="number">111</span>,<span class="number">74</span>,<span class="number">49</span>,<span class="number">83</span>,<span class="number">108</span>,<span class="number">94</span>,<span class="number">108</span>,<span class="number">84</span>,<span class="number">6</span>,<span class="number">96</span>,<span class="number">83</span>,<span class="number">44</span>,<span class="number">121</span>,<span class="number">104</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">95</span>,<span class="number">117</span>,<span class="number">101</span>,<span class="number">99</span>,<span class="number">123</span>,<span class="number">127</span>,<span class="number">119</span>,<span class="number">96</span>,<span class="number">48</span>,<span class="number">107</span>,<span class="number">71</span>,<span class="number">92</span>,<span class="number">29</span>,<span class="number">81</span>,<span class="number">107</span>,<span class="number">90</span>,<span class="number">85</span>,<span class="number">64</span>,<span class="number">12</span>,<span class="number">43</span>,<span class="number">76</span>,<span class="number">86</span>,<span class="number">13</span>,<span class="number">114</span>,<span class="number">1</span>,<span class="number">117</span>,<span class="number">126</span>,<span class="number">0</span>] </span><br><span class="line">i=<span class="number">0</span> </span><br><span class="line">c=<span class="string">''</span> </span><br><span class="line"><span class="keyword">while</span> (i&lt;<span class="number">56</span>): </span><br><span class="line">    a[i] = a[i] ^ b[i] ^ <span class="number">0x13</span></span><br><span class="line">    c += chr(a[i]) </span><br><span class="line">    i=i+<span class="number">1</span> </span><br><span class="line"><span class="keyword">print</span> (c)</span><br></pre></td></tr></table></figure>
+<h2 id="3-helloctf"><a href="#3-helloctf" class="headerlink" title="3.helloctf"></a>3.helloctf</h2><p>进入IDA查看，这个程序不是很长也比较好分析，直接来看这个比较函数，如果v10和v13相等就输出success，否则就是失败。</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/VfhRNn.png" alt></p>
+<p>v13就是题目中给出的那一串字符串，那么v10是怎么出来的呢。通过分析这一段函数</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfhc7j.png" alt></p>
+<p>v10是由v8拼起来的，v8是由v4输入的（sprintf），v4是v9不断迭代出来的，v9是我们输入的字符串。<br>这个sprintf中间还有一个参数，点进去后发现是 %x </p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfh2As.png" alt></p>
+<p>所以是按十六进制输出的。所以这个程序就是将我们的输入按十六进制输出到v10中，最后v10要等于v13。<br>按照题意写出解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0x43</span>,<span class="number">0x72</span>,<span class="number">0x61</span>,<span class="number">0x63</span>,<span class="number">0x6b</span>,<span class="number">0x4d</span>,<span class="number">0x65</span>,<span class="number">0x4a</span>,<span class="number">0x75</span>,<span class="number">0x73</span>,<span class="number">0x74</span>,<span class="number">0x46</span>,<span class="number">0x6f</span>,<span class="number">0x72</span>,<span class="number">0x46</span>,<span class="number">0x75</span>,<span class="number">0x6e</span>]</span><br><span class="line">b = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    b += chr(i)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
+<h2 id="4-open-source"><a href="#4-open-source" class="headerlink" title="4.open-source"></a>4.open-source</h2><p>直接看源码<br>按照题意解密</p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfbwyq.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/06/13/Vfbdln.png" alt></p>
+<p>注意这里需要按16进制输出</p>
+<h2 id="5-simple-unpack"><a href="#5-simple-unpack" class="headerlink" title="5.simple-unpack"></a>5.simple-unpack</h2><p>题目中有提示文件加了壳，所以先讲文件拖入peid查壳，发现是upx壳，这也是个比较基础的壳，破解的工具很多，我这里选择的是upxshell,脱壳之后拖入IDA，可以看到明文的flag</p>
+<h2 id="6-logmein"><a href="#6-logmein" class="headerlink" title="6.logmein"></a>6.logmein</h2><p>程序并不难理解，就是 v7和v8相互异或的过程</p>
+<p><img src="https://s2.ax1x.com/2019/06/15/VISfLF.png" alt></p>
+<p>下面说代码里的两个坑：</p>
+<ol>
+<li>(<em>(&amp;v7 + i % v6) 首先&amp;v7就是对v7取地址，后面对加法相当于是指针的偏移，最后对 </em>() 就是取地址中的内容，所以这句代码就是对v7的一个遍历</li>
+</ol>
+<p>2.第二个坑就是这个v7</p>
+<p><img src="https://s2.ax1x.com/2019/06/15/VISWsU.png" alt><br>v7在内存中是一个长整型数据，那就涉及到一个存储顺序对问题，这里肯定是小端序，所以我们一定要注意将v7转换成字符之后读取对顺序和显示对顺序是反的，因为指针是从低地址向高地址移动</p>
+<p>将题目过程翻译成python脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">v7 = <span class="string">'harambe'</span></span><br><span class="line">v8 = <span class="string">r':"AL_RT^L*.?+6/46'</span></span><br><span class="line">s = <span class="string">""</span></span><br><span class="line">print(len(v8))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(v8)):</span><br><span class="line">    s += chr(ord(v7[i % <span class="number">7</span>]) ^ ord(v8[i]))</span><br><span class="line"></span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure></p>
+
     </article>
     <!-- license  -->
     
@@ -403,13 +443,18 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/06/13/攻防世界逆向入门writeup/">http://yoursite.com/2019/06/13/攻防世界逆向入门writeup/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/06/13/攻防世界逆向入门writeup/">June 13th 2019, 10:41:05 am</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/06/13/攻防世界逆向入门writeup/">June 13th 2019, 10:43:27 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/06/13/攻防世界逆向入门writeup/">June 17th 2019, 7:30:33 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/06/28/算法设计课程重要例题代码/" title="算法设计课程重要例题代码">
+                    <div class="nextTitle">算法设计课程重要例题代码</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -530,7 +575,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-re1"><span class="toc-number">1.</span> <span class="toc-text">1.re1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-game"><span class="toc-number">2.</span> <span class="toc-text">2.game</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-helloctf"><span class="toc-number">3.</span> <span class="toc-text">3.helloctf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-open-source"><span class="toc-number">4.</span> <span class="toc-text">4.open-source</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-simple-unpack"><span class="toc-number">5.</span> <span class="toc-text">5.simple-unpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-logmein"><span class="toc-number">6.</span> <span class="toc-text">6.logmein</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -773,9 +818,14 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -788,6 +838,11 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href="/2019/06/28/算法设计课程重要例题代码/">算法设计课程重要例题代码</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -806,7 +861,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/10</span><a class="archive-post-title" href="/2019/06/10/2014火眼恶意代码逆向分析wp/">2014火眼恶意代码逆向分析wp</a>
+            <span class="archive-post-date">06/10</span><a class="archive-post-title" href="/2019/06/10/2018火眼恶意代码逆向分析wp/">2018火眼恶意代码逆向分析wp</a>
         </li>
     
     
@@ -831,22 +886,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
         </li>
     
     
@@ -896,9 +951,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
-    
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
+    
+        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
+    
+        <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
         <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
     
@@ -909,6 +966,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
     
@@ -949,7 +1008,7 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF-逆向"><span class="iconfont-archer">&#xe60a;</span>CTF-逆向</span>
+        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
     
         <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
     
@@ -959,13 +1018,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
     
-        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
-    
         <span class="sidebar-category-name" data-categories="ACM"><span class="iconfont-archer">&#xe60a;</span>ACM</span>
+    
+        <span class="sidebar-category-name" data-categories="计算机网络"><span class="iconfont-archer">&#xe60a;</span>计算机网络</span>
     
         <span class="sidebar-category-name" data-categories="BlackHatTools"><span class="iconfont-archer">&#xe60a;</span>BlackHatTools</span>
     
         <span class="sidebar-category-name" data-categories="python"><span class="iconfont-archer">&#xe60a;</span>python</span>
+    
+        <span class="sidebar-category-name" data-categories="CTFweb"><span class="iconfont-archer">&#xe60a;</span>CTFweb</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
