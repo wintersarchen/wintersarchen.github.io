@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>tags · HackPluto&#39;s Blog</title>
+    <title>应用层知识总结 · HackPluto&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">HackPluto&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">应用层知识总结</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">HackPluto's Blog</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/2.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            应用层知识总结
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="应用层,计算机网络">应用层,计算机网络</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">708</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/08</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -340,15 +401,18 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <p><strong>一.引导协议BOOTP：</strong><br>1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）<br>2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。<br>3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。<br>4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。<br>5.使用超时重传，重传使用指数退避策略。<br>6.请求和响应报文不能分片（300字节）。<br>7.如何使用路由器转发BOOTP：<br>    通常用在本网没有BOOTP服务器的情况下<br>    路由器此时称作中继代理<br>    客户机先将数据包发给路由器，路由器收到包后将自己的IP填入路由器IP项，跳数加1，单薄给BOOTP服务器<br>    服务器响应和上述过程相反，当跳数为3时丢弃</p>
+<p><strong>二.动态主机配置协议DHCP：</strong><br>1.动态配置必要性<br>    BOOTP需要人工进行协议参数的配置<br>    BOOTP适用于相对静态的网络<br>    IP地址不足，所有人同时上网的可能性不大，适合动态分配IP地址<br>2.DHCP组成三要素：<br>    DHCP服务器<br>    DHCP Relay（路由器，交换机）<br>    DHCP客户端<br>3.DHCP三种地址分配策略：<br>    1.手动配置 为某一个特定主机分配一个IP<br>    2.自动配置 为某一个新上线的主机分配一个永久IP地址<br>    3.全动态配置 为上网主机临时分配一个IP地址<br>    存放所有可分配IP的地方叫地址池<br>4.客户状态转换：<br>    DHCP DISCOVER 是客户端使用DHCP时发送的第一个报文<br>    DHCP OFFER 是服务器向客户端DISCOVER的响应<br>    DHCP REQUEST 是在服务器选择的过程中客户端对OFFER的响应，也可以作为客户端延长IP地址租期的请求<br>    DHCP ACK 服务器对REQUEST的响应，包含了客户端IP地址的信息<br>    DHCP NACK 服务器对REQUEST的拒绝响应，客户端一般会重新开始DHCP请求<br>    DHCP RELEASE 客户端主动释放分配给他的IP地址<br>    DHCP DECLINE 客户端发现分配给他的IP地址不能用，发送此报文<br>    DHCP INFORM 客户端从服务器获得DNS，网关等其他网络信息</p>
+<p><strong>三.域名系统DNS</strong>：<br>1.DNS出现之前计算机使用主机上的Hosts文件进行域名的解析<br>2.层次型命名机制 引入结构，分层命名，按层分布式管理<br>3.常见顶级域<br>4.域名解析原理</p>
+
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
-            </p><p>原文链接：<a href="http://yoursite.com/tags/index.html">http://yoursite.com/tags/index.html</a>
-            </p><p>发表日期：<a href="http://yoursite.com/tags/index.html">April 19th 2019, 11:30:53 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/tags/index.html">April 19th 2019, 11:31:28 pm</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/07/08/应用层知识总结/">http://yoursite.com/2019/07/08/应用层知识总结/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/07/08/应用层知识总结/">July 8th 2019, 1:16:55 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/07/08/应用层知识总结/">July 8th 2019, 2:16:21 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -358,6 +422,11 @@
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/06/28/算法设计课程重要例题代码/" title="算法设计课程重要例题代码">
+                    <div class="prevTitle">算法设计课程重要例题代码</div>
+                </a>
             
         </li>
     </ul>
@@ -454,6 +523,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -965,6 +1052,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
