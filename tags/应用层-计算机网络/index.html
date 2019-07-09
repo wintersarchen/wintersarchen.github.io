@@ -351,7 +351,10 @@
                 <span>应用层知识总结</span>
         </a>
         <div class="abstract-content">
-            一.引导协议BOOTP：1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。5.使用超时重传，重传使用指数退避策略。6.请求和响应报文不能分片（300字节）。7.如何使用路由器转发BOOTP：    通常用在本网没有BOOTP服务器的情况下    路由器此时称作中继代理...
+            重点知识点：    DHCP ★★★★    DNS  ★★★★★    HTTP ★★★★★    WWW ★★★★★
+一.引导协议BOOTP：
+
+1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。5.使用超时重传，重传使用指数退避策略。6.请求和响应报文不能分片（...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -709,14 +712,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 20
@@ -785,12 +780,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
@@ -840,15 +835,15 @@
     
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
-    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
+    
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
-        <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
-    
         <span class="sidebar-tag-name" data-tags="windows,域控,内网渗透"><span class="iconfont-archer">&#xe606;</span>windows,域控,内网渗透</span>
+    
+        <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
     
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
     
@@ -858,19 +853,19 @@
     
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
     
         <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
-    
-        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
         <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
     
@@ -909,15 +904,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
-    
         <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
+    
+        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
     
         <span class="sidebar-category-name" data-categories="Linux"><span class="iconfont-archer">&#xe60a;</span>Linux</span>
     
-        <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
-    
         <span class="sidebar-category-name" data-categories="内网渗透"><span class="iconfont-archer">&#xe60a;</span>内网渗透</span>
+    
+        <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
     
         <span class="sidebar-category-name" data-categories="ACM"><span class="iconfont-archer">&#xe60a;</span>ACM</span>
     

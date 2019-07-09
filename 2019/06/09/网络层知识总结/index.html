@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -401,10 +401,106 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><strong>一.网络层的功能</strong>：<br>1.将上层的报文段从源主机传输到目的主机<br>2.控制子网（路由，拥塞控制，服务质量，网络互连）<br><strong>二.网络层设计的问题</strong>：<br>1.存储转发数据包交换：LAN，WAN和Int的数据包交换基于分组的存储转发<br>2.提供给传输层的服务：<br>服务的设计目标有三点，1是服务要独立于路由器技术，2是路由器的数量网络的拓扑对于传输层不可见即透明性，3是使网络地址有统一的编址方式<br>服务类型有两种，1是面向连接的服务即虚电路服务，2是无连接的服务即数据报服务<br><strong>三.无连接服务的实现</strong>：<br>数据报网络：不需要建立源到目的的虚拟电路<br>路由器不保留任何关于连接状态的信息<br>网络为每个分组单独的规划路由，相同的源到目的可能经过的路由不相同<br>数据报服务的特点：1.是不可靠的不保证服务质量，2.所发送的分组可能到达时会顺序错误，分组丢失或者时限内没有达到目的主机<br><strong>四.面向连接的服务</strong>：<br>传输数据前建立连接<br>数据传输时保持连接<br>数据传输后断开连接<br><strong>五.虚电路</strong>：<br>为面向连接的会话建立的通信信道自然是逻辑的，常被称作虚电路(virtual circuit)，它关心的是端点。与在网络上寻求一条实际的物理路径相比，这条信道更关心的是保持两个端点的联系。虚电路，应该是指“意”的虚。就是存在那么一条电路，逻辑上好象是固定的存在的，但事实它是随着会话的不同而使用不同的路径。也就是说没有一条固定的路径。它是在通信过程中灵活地变动的。<br>虚电路中每一项都记录着该虚电路的ID，前一个节点名字和后一个节点名字<br>虚电路类型 永久虚电路，交换虚电路<br><strong>六.虚电路和数据报的区别</strong>：<br>服务的思路来源不同：<br>虚电路来源于传统的电信网，对于可靠通信要求比较高同时价格就比较昂贵。<br>数据报服务力求使网络生存性好使对网络的控制力分散。因此只能尽最大的努力给网络提供服务。<br>其中，因特网采用无连接的数据报服务。虚电路主要应用在电信网中。<br><img src="https://s2.ax1x.com/2019/06/09/VsXoAs.png" alt><br><strong>七.路由算法与链路层转发算法的区别</strong>：<br>不同于链路层（由目的地址和端口号组成，表的更新由手动配置和反向学习）<br>网络层的路由表结构为目的地址和下一跳，表的更新为直接连接，手动配置和通过路由协议<br><strong>八.虚电路路由与数据报路由</strong>：<br>数据报路由：每一个达到的分组<br>虚电路路由：建立虚电路时建立会话路由<br><strong>九.静态路由与动态路由</strong>：<br>静态路由：手动配置路由表，当表中多个下一跳相同时可以使用默认理由<br>动态路由：分布式动态的配置路由表，通过节点间的信息交换更新路由表<br><strong>十.路由算法</strong>：<br>最短路径算法：Dijkstra</p>
+        <p><strong>网络层重点：</strong><br><strong>虚电路与数据报网络的比较★★★☆☆</strong><br><strong>最短路径算法★★★☆☆</strong><br><strong>距离矢量算法★★★★★</strong><br><strong>链路状态算法★★★★★</strong><br><strong>IPv4协议★★★★★</strong><br><strong>IP地址★★★★★</strong><br><strong>Internet控制协议★★★★★</strong><br><strong>OSPF——内部网关路由协议★★★☆☆</strong><br><strong>Internet编址方式★★★★☆</strong><br><strong>第四章  互联网协议IP★★★★★</strong><br><strong>Internet控制报文协议ICMP★★★★★</strong></p>
+<p><strong>1.网络层的功能</strong>：</p>
+<blockquote>
+<p>1.将上层的报文段从源主机传输到目的主机，将报文段封装成分组<br>2.控制子网（路由，拥塞控制，服务质量，网络互连）</p>
+</blockquote>
+<p><strong>2.网络层设计的问题</strong>：</p>
+<blockquote>
+<p>1.存储转发数据包交换：LAN，WAN和Int的数据包交换基于分组的存储转发<br>2.提供给传输层的服务：<br>服务的设计目标有三点，1是服务要独立于路由器技术，2是路由器的数量网络的拓扑对于传输层不可见即透明性，3是使网络地址有统一的编址方式<br>服务类型有两种，1是面向连接的服务即虚电路服务，2是无连接的服务即数据报服务</p>
+</blockquote>
+<p><strong>3.无连接服务的实现</strong>：</p>
+<blockquote>
+<p>数据报网络：不需要建立源到目的的虚拟电路<br>路由器不保留任何关于连接状态的信息<br>网络为每个分组单独的规划路由，相同的源到目的可能经过的路由不相同<br>数据报服务的特点：<br>1.是不可靠的不保证服务质量，<br>2.所发送的分组可能到达时会顺序错误，分组丢失或者时限内没有达到目的主机<br>3.当网络拥塞时可能会丢弃分组</p>
+</blockquote>
+<p><strong>4.面向连接的服务</strong>：</p>
+<blockquote>
+<p>传输数据前建立连接<br>数据传输时保持连接<br>数据传输后断开连接</p>
+</blockquote>
+<p><strong>5.虚电路</strong>：</p>
+<blockquote>
+<p>为面向连接的会话建立的通信信道自然是逻辑的，常被称作虚电路(virtual circuit)，它关心的是端点。与在网络上寻求一条实际的物理路径相比，这条信道更关心的是保持两个端点的联系。虚电路，应该是指“意”的虚。就是存在那么一条电路，逻辑上好象是固定的存在的，但事实它是随着会话的不同而使用不同的路径。也就是说没有一条固定的路径。它是在通信过程中灵活地变动的。<br>虚电路中每一项都记录着该虚电路的ID，前一个节点名字和后一个节点名字<br>虚电路类型 永久虚电路，交换虚电路</p>
+</blockquote>
+<p><strong>6.虚电路和数据报的区别</strong>：</p>
+<blockquote>
+<p> 服务的思路来源不同：<br>虚电路来源于传统的电信网，对于可靠通信要求比较高同时价格就比较昂贵。<br>数据报服务力求使网络生存性好使对网络的控制力分散。因此只能尽最大的努力给网络提供服务。<br>其中，因特网采用无连接的数据报服务。虚电路主要应用在电信网中。<br><img src="https://s2.ax1x.com/2019/06/09/VsXoAs.png" alt></p>
+</blockquote>
+<p><strong>7.路由算法与链路层转发算法的区别</strong>:</p>
+<blockquote>
+<p>路由Routing 根据分组包含的信息（目的地址）找到转发路径<br>不同于数据链路层（由目的地址和端口号组成，表的更新由手动配置和反向学习）<br>网络层的路由表结构为目的地址和下一跳，表的更新为直接连接，手动配置和通过路由协议</p>
+</blockquote>
+<p><strong>8.虚电路路由与数据报路由</strong>：</p>
+<blockquote>
+<p>数据报路由：每一个达到的分组<br>虚电路路由：建立虚电路时建立会话路由</p>
+</blockquote>
+<p><strong>9.静态路由与动态路由</strong>：</p>
+<blockquote>
+<p>静态路由（非适应性）：根据网络初始状态进行路由选择，不能适应网络拓扑变化。手动配置路由表，当表中多个下一跳相同时可以使用默认路由。<br>动态路由（自适应）：根据网络当前信息和拓扑结构进行路由选择，需要路由协议。分布式动态的配置路由表，通过节点间的信息交换更新路由表</p>
+</blockquote>
+<p><strong>10.最短路径算法</strong>：</p>
+<blockquote>
+<p>汇集树：从所有的源到给定目标的最佳路由的集合称为汇集树。<br>最短路径算法：Dijkstra<br>根据最短路径算法得到某一节点的汇集树，进而得到路由表。</p>
+</blockquote>
+<p><strong>11.泛洪算法</strong>：</p>
+<blockquote>
 <p>泛洪算法：属于静态路由算法，实现不需要知道任何网络信息，向除了数据来源端口之外的所有端口转发信息，最后最先到达目的地的数据包可能走的最优路径。问题：数据包量太大。<br>抑制泛洪算法：跳计数，记录路径，选择性扩散</p>
-<p>距离矢量算法（RIP）：路由表格式：目标，到目标的代价，下一跳。给邻居发送自己的路由表，通过对比（更好，更新否则丢弃）更新路由表。<br>特点：好事传千里，坏事不出门<br>对于链路修好或者新加节点，网络收敛速度很快，网络中的节点快速更新自己的路由表。<br>对于链路中走不通时，由于会有别的节点的信息的干扰导致网络中的节点误以为那一个节点还存在。</p>
-<p>链路状态路由(OSPF,IS-IS):<br>方法：将我与谁连接告诉所有的路由器，那么就可以组成一张网络图，由这幅图计算每一条路径。<br>步骤<br>1 发现邻接点获取其网络地址：<br>点对点发送HELLO分组，邻居返回响应<br>多个路由器在一个LAN时，其中一个运行路由协议，整个LAN抽象成一个点<br>2 测量到每一个邻居的距离：<br>发送一个ECHO分组，邻居返回响应，计算返回的时间t,t/2即两个点之间的距离，多次测量取平均值<br>等价路由，负载均衡<br>3 构建链路状态分组（LSP）：<br>与路由计算相关：LSP节点的ID，直接相连的邻居，到邻居的代价<br>与可靠性相关：序号（区分新旧信息与可靠泛洪相关），age<br>什么时候LSP更新：<br>1.计时器超时 通常为几十分钟<br>2.网络变化 直接相连的链路断开（由链路层协议判断） 直接连接的邻居下线（通过定期发送HELLO检测）<br>4 发送给其他所有的路由器：<br>方法：可靠泛洪<br>将LSP发送给相连的所有节点<br>更新最新的LSP，再转发给除了发送端的所有相连链路<br>相邻路由器之间有确认和重传机制<br>抑制泛洪规模：每一个包都有一个序号，每一个路由器通过记录分组如果遇到了序号更小的包就丢弃<br>序号存在的问题：<br>1.序号出现重复 解决方法：使用32bit<br>2.路由器崩溃重启后拒绝正常分组<br>3.序号被破坏 解决方法：设置age（TTL）<br>当一个新的LSP到来时不急着转发，等一会儿，当有新的再来时比较，序号相同时是重复分组不再转发，序号不同时比较age，保留最新的分组，旧的丢弃<br>5 计算到每一个节点的最短路径<br>Dijkstra算法<br>链路状态算法总结：<br>优点：网络收敛快<br>缺点：存储空间开销，CPU开销<br>与距离矢量算法对比：<br>相同点：都要交流信息<br>不同点：DV仅与邻居通信，LSP与所有路由器交换信息；<br>DV接收到的路由向量不一定是正确的，LSP接收到的一定是正确的；当路由器不能正常工作时，DV会广播错误的路径信息，全网都会得到错误的信息，LSP会广播错误的链路开销，每一个路由器只会自己和自己比较<br><strong>十一.层次路由</strong>：<br>由于网络的增长带来的路由器路由表项过大，所以将路由器分撑成区域，每一个路由器知道如何到达自己区域内的目标，对别的区域不清楚。<br>带来的问题：<br>路由表中的项不一定是最佳路由<br><strong>十二.广播路由</strong>：<br>广播：发送分组到所有的目标<br>多目标路由：每一个分组包含一个目标列表，路由器检查列表实现转发<br>逆向路径转发：扩散来自上游节点的分组<br><strong>十三.组播路由</strong>：<br>将分组发送到一组节点<br>多播路由：<br>组管理 创建和撤销组，路由器通过交换信息知道主机属于哪一个组</p>
+</blockquote>
+<p><strong>12.距离矢量算法（RIP）</strong>:</p>
+<blockquote>
+<p>路由表格式：目标，到目标的距离，下一跳。<br>给邻居发送自己的路由表，通过对比（更好，更新否则丢弃）更新路由表。<br>特点：好事传千里，坏事不出门<br>1.对于链路修好或者新加节点，网络收敛速度很快，网络中的节点快速更新自己的路由表。<br>2.对于链路中走不通时，由于会有别的节点的信息的干扰导致网络中的节点误以为那一个节点还存在，这样网络中的节点到达那个故障节点的跳数就会越来越大直到16才停止，然而这个过程通常要很久。</p>
+</blockquote>
+<blockquote>
+<p>解决方法：<br>1.水平分割 假设如果一条路由是从一个特定路由器处学习来的， RIP节点不广播关于这个特定路由的更新到这个相邻路由器。<br>2.带毒性逆转的水平分割 如果某邻居是我到某目的地的下一跳,则我总是告诉该邻居我不能到达相应的节点</p>
+</blockquote>
+<p><strong>13.链路状态路由(OSPF,IS-IS)</strong>:</p>
+<blockquote>
+<p>方法：将我与谁连接告诉所有的路由器，那么就可以组成一张网络图，由这幅图计算每一条路径。<br>步骤<br>1 发现邻接点获取其网络地址：<br>点对点发送HELLO分组，邻居返回响应<br>多个路由器在一个LAN时，其中一个运行路由协议，整个LAN抽象成一个点<br>2 测量到每一个邻居的距离：<br>发送一个ECHO分组，邻居返回响应，计算返回的时间t,t/2即两个点之间的距离，多次测量取平均值<br>等价路由，负载均衡<br>3 构建链路状态分组（LSP）：<br>与路由计算相关：LSP节点的ID，直接相连的邻居列表，到邻居的代价<br>与可靠性相关：序号（区分新旧信息与可靠泛洪相关），age</p>
+</blockquote>
+<blockquote>
+<p>什么时候LSP更新：<br>1.计时器超时 通常为几十分钟<br>2.网络变化 直接相连的链路断开（由链路层协议判断） 直接连接的邻居下线（通过定期发送HELLO检测）</p>
+</blockquote>
+<blockquote>
+<p>4 分发链路状态包：<br>方法：可靠泛洪<br>将LSP发送给相连的所有节点<br>更新最新的LSP，再转发给除了发送端的所有相连链路<br>相邻路由器之间有确认和重传机制<br>抑制泛洪规模：每一个包都有一个序号，每一个路由器通过记录分组如果遇到了序号更小的包就丢弃</p>
+</blockquote>
+<blockquote>
+<p>序号存在的问题：<br>1.序号出现重复 解决方法：使用32bit<br>2.路由器崩溃重启后拒绝正常分组<br>3.序号被破坏<br>解决方法：设置age（TTL）<br>当一个新的LSP到来时不急着转发，等一会儿，当有新的再来时比较，序号相同时是重复分组不再转发，序号不同时比较age，保留最新的分组，旧的丢弃</p>
+</blockquote>
+<blockquote>
+<p>链路状态算法总结：<br>优点：网络收敛快<br>缺点：存储空间开销，CPU开销<br>与距离矢量算法对比：<br>相同点：都要交流信息<br>不同点：DV仅与邻居通信，LSP与所有路由器交换信息；<br>DV接收到的路由向量不一定是正确的，LSP接收到的一定是正确的；当路由器不能正常工作时，DV会广播错误的路径信息，全网都会得到错误的信息，LSP会广播错误的链路开销，每一个路由器只会自己和自己比较</p>
+</blockquote>
+<p><strong>14.层次路由</strong>：</p>
+<blockquote>
+<p>由于网络的增长带来的路由器路由表项过大，所以将路由器分撑成区域，每一个路由器知道如何到达自己区域内的目标，对别的区域不清楚。<br>带来的问题：<br>路由表中的项不一定是最佳路由</p>
+</blockquote>
+<p><strong>15.拥塞控制算法</strong>：</p>
+<blockquote>
+<p>1.开环方法 试图采用良好的设计解决问题，本质是从一开始就保证不会发送拥塞问题。<br>2.闭环方法：显示反馈 隐式反馈<br>网络升级，流量感知路由，准入控制（虚电路网络），流量限制，负载丢弃。</p>
+</blockquote>
+<p><strong>16.网络如何连接</strong>：</p>
+<blockquote>
+<p>物理层：中继器<br>数据链路层：网桥<br>网络层：路由器<br>高层：多协议网关</p>
+</blockquote>
+<p><strong>17.隧道技术</strong>：</p>
+<blockquote>
+<p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据可以是不同协议的数据帧或包。隧道协议将其它协议的数据帧或包重新封装然后通过隧道发送。新的帧头提供路由信息，以便通过互联网传递被封装的负载数据。</p>
+</blockquote>
+<p><strong>18.IP地址分类</strong>：</p>
+<blockquote>
+<p>A 网络号 1字节 主机号 3字 1.0.0.0-126.255.255.255<br>B 网络号 2字节 主机号 2字节<br>128.1.0.1-191.255.255.254<br>C 网络号 3字节 主机号 1字节<br>192.0.1.1-223.255.255.254<br>D 224.0.0.1-239.255.255.254 一般用于多路广播<br>IP分等级的好处：<br>1.方便了IP地址的管理<br>2.减少了路由表所占的存储空间</p>
+</blockquote>
+<p><strong>19.广播</strong>：</p>
+<blockquote>
+<p>32位全为1为受限广播地址，也叫本地广播。本网的所有主机都会接受该分组，但是路由器会阻挡该分组通过。<br>主机号全为1 称为直接广播地址，路由器将分组以广播的方式发送给特定的网络。</p>
+</blockquote>
+<p><strong>20.路由表的特殊表目</strong>：</p>
+<blockquote>
+<p>默认路由：选路不匹配时，走默认路由 0.0.0.0 0.0.0.0<br>网络路由：将数据包转发到某一个特点网段<br>主机路由：将数据包转发到特点主机</p>
+</blockquote>
+<p><strong>21.ARP协议</strong>：</p>
+<blockquote>
+</blockquote>
+<p>广播请求，单播应答<br>ARP解析过程：<br>A—-&gt;B<br>1.A检查ARP缓存有没有B<br>2.如果没有，广播请求<br>3.B将A的信息存入ARP缓存，回复响应<br>ARP具有本地性，不能跨越网络。<br>如果要通信的主机和源主机不在一个网络，A先将数据发给默认的网关，由路由器来转发。<br>ARP欺骗攻击<br><a href="http://www.landq.cn/2019/05/27/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%86%99%E5%B7%A5%E5%85%B7(3)--ARP%E6%AC%BA%E9%AA%97/" target="_blank" rel="noopener">http://www.landq.cn/2019/05/27/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%86%99%E5%B7%A5%E5%85%B7(3)--ARP%E6%AC%BA%E9%AA%97/</a></p>
 
     </article>
     <!-- license  -->
@@ -413,7 +509,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">http://yoursite.com/2019/06/09/网络层知识总结/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">June 9th 2019, 11:00:30 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">June 13th 2019, 10:43:34 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">July 9th 2019, 5:30:06 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -806,14 +902,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 20
@@ -882,12 +970,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
@@ -937,15 +1025,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
-    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
+    
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
-        <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
-    
         <span class="sidebar-tag-name" data-tags="windows,域控,内网渗透"><span class="iconfont-archer">&#xe606;</span>windows,域控,内网渗透</span>
+    
+        <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
     
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
     
@@ -955,19 +1043,19 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
     
         <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
-    
-        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
         <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
     
@@ -1006,15 +1094,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
-    
         <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
+    
+        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
     
         <span class="sidebar-category-name" data-categories="Linux"><span class="iconfont-archer">&#xe60a;</span>Linux</span>
     
-        <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
-    
         <span class="sidebar-category-name" data-categories="内网渗透"><span class="iconfont-archer">&#xe60a;</span>内网渗透</span>
+    
+        <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
     
         <span class="sidebar-category-name" data-categories="ACM"><span class="iconfont-archer">&#xe60a;</span>ACM</span>
     
