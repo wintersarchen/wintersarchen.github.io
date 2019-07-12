@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">4.8k</span>阅读时长: <span class="post-count reading-time">17 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -499,8 +499,72 @@ height:50vh;
 </blockquote>
 <p><strong>21.ARP协议</strong>：</p>
 <blockquote>
-</blockquote>
 <p>广播请求，单播应答<br>ARP解析过程：<br>A—-&gt;B<br>1.A检查ARP缓存有没有B<br>2.如果没有，广播请求<br>3.B将A的信息存入ARP缓存，回复响应<br>ARP具有本地性，不能跨越网络。<br>如果要通信的主机和源主机不在一个网络，A先将数据发给默认的网关，由路由器来转发。<br>ARP欺骗攻击<br><a href="http://www.landq.cn/2019/05/27/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%86%99%E5%B7%A5%E5%85%B7(3)--ARP%E6%AC%BA%E9%AA%97/" target="_blank" rel="noopener">http://www.landq.cn/2019/05/27/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%86%99%E5%B7%A5%E5%85%B7(3)--ARP%E6%AC%BA%E9%AA%97/</a></p>
+</blockquote>
+<p><strong>22.分类IP地址的问题</strong>：</p>
+<blockquote>
+<p>1.地址浪费<br>2.不够灵活<br>3.路由表很大<br>3.4.IP地址不够用<br>1，2解决方法 划分子网<br>3 解决方法 构造超网<br>4 解决方法 NAT转换</p>
+</blockquote>
+<p><strong>23.多个物理网络共享一个IP地址</strong>：</p>
+<blockquote>
+<p>1 透明路由器<br>使用路由器将一个IP地址和一个局域网相连，报文先投递给路由器，再转发给局域网。</p>
+</blockquote>
+<blockquote>
+<p>2.代理ARP<br>代理ARP是ARP协议的一个变种。对于没有配置缺省网关的计算机要和其他网络中的计算机实现通信，网关收到源计算机的 ARP 请求会使用自己的 MAC 地址与目标计算机的 IP地址对源计算机进行应答。代理ARP就是将一个主机作为对另一个主机ARP进行应答。它能使得在不影响路由表的情况下添加一个新的Router，使得子网对该主机来说变得更透明化。</p>
+</blockquote>
+<blockquote>
+<p>3.划分子网<br>1.两级地址不够灵活，地址浪费（网络号+主机号），所以采用三级地址进行网络划分（网络号+子网号+主机号）<br>子网：从主机号借几位作为网络号，划分子网是内部网络的事情对外不可见。<br>2.子网掩码：<br>通过子网掩码判断目标网络是否使用了子网划分<br>IP地址和子网掩码相与，得到子网号。<br>3.路由器的转发：</p>
+</blockquote>
+<blockquote>
+<p>1 从收到的分组首部提取目的IP<br>2 用各网络的子网掩码逐个与IP相与，看有没有和网络号匹配的，若匹配直接转发，不匹配进行下一步<br>3 若路由表中有与目的IP相同的特定主机路由，就转发，否则进行下一步<br>4 对路由表的每一行的子网掩码与目的IP相与，如果得到的网络号相同就转发，否则进行下一步<br>5 将分组交给默认路由<br>6 报告分组转发错误<br>子网划分的方法：</p>
+</blockquote>
+<blockquote>
+<p>1.等长子网<br>关键：确定子网位数<br>根据需要划分的子网数，确定网络号需要从主机号借几位<br>2.变长子网<br>第一次子网划分：<br>主机空间长度：考虑主机最多的子网<br>第二次子网划分：根据主机数确定子网数，方法和等长子网一样</p>
+</blockquote>
+<p><strong>24.CIDR 无分类域间路由</strong>：</p>
+<blockquote>
+<p>起因：1.路由表项目数急剧增长 2.分类IP的不合理<br>解决： 路由聚合 将下一跳相同的，集合多个小的，变成一个大的，按地址快路由，路由聚合也称为构成超网，这种技术称为CIDR。<br>CIDR使用各种长度的网络前缀来代替分类地址中的网络号和子网号。采用无分类编址，网络前缀都相同的连续IP地址组成“CIDR地址块”。</p>
+</blockquote>
+<blockquote>
+<p>CIDR表示方式：<br>IP地址从三级编址又回到了二级编址<br>IP地址 = {&lt;网络前缀&gt;，&lt;主机号&gt;}<br>CIDR使用斜线法，在IP地址后面加一个斜线，写上网络前缀所占的比特数。<br>10.0.0.0/10 可简写 10/10<br>在网络前缀后面加一个星号</p>
+</blockquote>
+<blockquote>
+<p>CIDR路由查找<br>1.分类地址时路由表的查找<br>把路由表组织称哈希表<br>2.无分类地址时查找路由表<br>仍采用哈希的方法<br>二叉线索树与最长匹配选路：<br>根据唯一前缀原则把路由表组织成一棵二叉树<br>为保证选路的匹配，外部节点必须完全匹配<br>最长匹配选路，相关内节点也包含地址/掩码，并按最长匹配选路</p>
+</blockquote>
+<p><strong>25.NAT网络地址转换</strong>：</p>
+<blockquote>
+<p>原因：<br>1.网络地址不够用<br>2.使用代理进行通信<br>作用：<br>1.解决IP地址不足，多台内部机器共享一个外部IP<br>2.出于安全考虑，隐蔽内部IP<br>本地地址：</p>
+</blockquote>
+<blockquote>
+<p>仅在内部使用的IP地址:<br>10.0.0.0 到 10.255.255.255 （10/8）<br>172.16.0.0 到 172.31.255.255 （172.16/12）<br>192.168.0.0 到 192.168.255.255 （192.168/16）<br>169.254.0.0到169.254.255.255 （169.254/16）<br>如何使用内部地址通信：<br>1.隧道技术<br>2.网络地址转换</p>
+</blockquote>
+<blockquote>
+<p>NAT就是通过某些设备来转换网络层地址<br>内部主机要和因特网通信，必须经过NAT路由器，经过NAT路由器时，路由器将源地址改为自己的公网IP</p>
+</blockquote>
+<blockquote>
+<p>NAT地址转换表<br>静态NAT 一个内部映射一个外部地址<br>动态NAT 多个内部映射多个外部<br>端口映射NAT 多个内部映射一个外部地址</p>
+</blockquote>
+<p><strong>26.IP数据报</strong>：</p>
+<blockquote>
+<p>IPv4数据报格式<br>前20字节是固定的<br>版本 4比特 0x4 -&gt; IPv4<br>首部长度 4比特 5-15<br>区分服务 8比特<br>总长度 2字节<br>标识 2字节 信原机随机产生，标志同一数据报的各个分片<br>标志 3比特 MF=1:还有分片;MF=0:没有分片 ,DF=0:允许分片<br>片偏移 13位 分片在原分组中的相对位置（8字节位单位） 解决了分片顺序<br>TTL 8比特<br>协议 8比特 0x01 ICMP 0x06 TCP 0x11 UDP<br>首部检验和 2字节 只检验数据报首部 反码运算求和<br>源地址 4字节<br>目的地址 4字节</p>
+</blockquote>
+<blockquote>
+<p>如何重组分片：<br>信宿机重组分片<br>优点：<br>1.不会反复分片重组<br>2.各分片独立选路<br>3.路由软件简化<br>缺点：<br>1.可能浪费带宽<br>2.丢失可能性增加</p>
+</blockquote>
+<blockquote>
+<p>如何判断一个数据报需不需要重组<br>MF和片偏移量都为0时，不用重组</p>
+</blockquote>
+<blockquote>
+<p>分片重组算法<br>数据结构：<br>存储数据报ID的缓冲区：存储第一个分片首部的缓冲区 用来重建原数据报的首部<br>重组表<br>数据缓冲区<br>重组定时器<br>数据总长度<br>计算重组后数据总长度：<br>收到MF=0的分片，总长度=报文长+片偏移*8</p>
+</blockquote>
+<p><strong>27.差错与控制报文 ICMP</strong>：<br>1.ICMP作用：<br>传递网络控制信息，提供差错报告<br>2.工作机制 路由器（主机）向其他路由器（主机）发送ICMP报文，只能向源端报告差错，不向信宿机和中间路由器报告<br>3.与IP协议的关系：<br>封装在IP协议中，只是IP协议的一个模块，不是比IP层更高的协议</p>
+<blockquote>
+<p>请求应答报文：<br>ICMP请求和应答报文的出现使任何主机和路由器可以向其他主机路由器发送请求应答，通过ICMP请求应答报文，网络管理员可以知道网络的可达性和时钟同步等信息。（ping命令，traceroute命令）<br>类型 8 回应请求报文/0 回应应答报文</p>
+</blockquote>
+<p>时间戳请求与应答报文<br>两个机器通过时间戳请求与应答报文来确定IP数据报在两个主机之间往返时间<br>可以用作两个机器中时钟的同步</p>
+<blockquote>
+<p>traceroute命令<br>原理 ICMP超时报文+TTL<br>判断何时到达目的主机：<br>1.发送方的探测报文中使用ICMP echo request 中间路由器返回ICMP超时报文，目标返回ICMP echo replay<br>2.利用UDP报文<br>源端发送UDP报文，使用一个不可能的端口，到达目的主机后，产生端口不可达的报文。</p>
+</blockquote>
 
     </article>
     <!-- license  -->
@@ -509,7 +573,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">http://yoursite.com/2019/06/09/网络层知识总结/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">June 9th 2019, 11:00:30 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">July 9th 2019, 5:30:06 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">July 11th 2019, 2:01:15 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -902,9 +966,28 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 20
+        Total : 21
         </div>
         <!-- search  -->
         
@@ -917,6 +1000,11 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span><a class="archive-post-title" href="/2019/07/11/数据链路层知识总结/">数据链路层知识总结</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -980,12 +1068,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
         </li>
     
     
@@ -1023,11 +1111,11 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
-    
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
@@ -1050,6 +1138,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
         <span class="sidebar-tag-name" data-tags="计算机网络,传输层"><span class="iconfont-archer">&#xe606;</span>计算机网络,传输层</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,数据链路层"><span class="iconfont-archer">&#xe606;</span>计算机网络,数据链路层</span>
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
     
@@ -1094,9 +1184,7 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="逆向"><span class="iconfont-archer">&#xe60a;</span>逆向</span>
     
-        <span class="sidebar-category-name" data-categories="CTF-web"><span class="iconfont-archer">&#xe60a;</span>CTF-web</span>
-    
-        <span class="sidebar-category-name" data-categories="CTF逆向"><span class="iconfont-archer">&#xe60a;</span>CTF逆向</span>
+        <span class="sidebar-category-name" data-categories="CTFweb"><span class="iconfont-archer">&#xe60a;</span>CTFweb</span>
     
         <span class="sidebar-category-name" data-categories="Linux"><span class="iconfont-archer">&#xe60a;</span>Linux</span>
     
@@ -1111,8 +1199,6 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="BlackHatTools"><span class="iconfont-archer">&#xe60a;</span>BlackHatTools</span>
     
         <span class="sidebar-category-name" data-categories="python"><span class="iconfont-archer">&#xe60a;</span>python</span>
-    
-        <span class="sidebar-category-name" data-categories="CTFweb"><span class="iconfont-archer">&#xe60a;</span>CTFweb</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

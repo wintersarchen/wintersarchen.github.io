@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>自己动手写工具(2)--TCP代理 · HackPluto&#39;s Blog</title>
+    <title>数据链路层知识总结 · HackPluto&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">HackPluto&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">自己动手写工具(2)--TCP代理</a>
+                <a href="#" class="post-name">数据链路层知识总结</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            自己动手写工具(2)--TCP代理
+            数据链路层知识总结
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class="post-intro-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,proxy">工具,python,proxy</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,数据链路层">计算机网络,数据链路层</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">941</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.6k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/05/10</span>
+                    <span class="post-intro-time">2019/07/11</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,26 +401,113 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>##TCP代理的简介<br>这次的博客给大家再介绍一个TCP代理的小工具，TCP代理是什么呢，就是处在应用层上位于真正的服务器和客户端之间用TCP的方式将流量从一个机子转到另一个机子，可以起到监控流量，修改数据包的功能。<br>代理服务器还有一个重要的作用就是隐藏背后的真正服务器，使服务器免受攻击。假如代理服务器挂了，后面的服务器仍然可以正常运行，而且如果背后的服务器还拥有多台代理服务器就会使自己更加安全。<br><img src="https://s2.ax1x.com/2019/05/10/EWVSz9.png" alt></p>
-<p>##实现的原理<br>1.代理先开启一个TCP服务<br>2.客户端先去连接代理<br>3.代理在与客户端取得连接后立即与远程的服务端建立TCP链接<br>4.无论是客户端还是服务端发送数据都是先发送到代理然后代理再决定对数据做不做修改，然后转发给接收方<br>5.当客户端与服务端都发出结束连接的信号时断开所有连接释放所有资源</p>
-<p>##代码实现<br>定义全局变量,其中flag变量是为了记录套接字的状态<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">local_host = <span class="string">""</span></span><br><span class="line">local_port = <span class="number">0</span></span><br><span class="line">remote_host = <span class="string">""</span></span><br><span class="line">remote_port = <span class="number">0</span></span><br><span class="line">receive_first = <span class="literal">True</span></span><br><span class="line">flag1 = <span class="literal">False</span></span><br><span class="line">flag2 = <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
-<p>定义主函数<br>使用sys.argv从命令行获取参数，如果输入格式不对则输出正确格式的范例，然后给每一个参数赋值，调用生成TCP服务的函数server_loop<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> local_host</span><br><span class="line">    <span class="keyword">global</span> local_port</span><br><span class="line">    <span class="keyword">global</span> remote_host</span><br><span class="line">    <span class="keyword">global</span> remote_port</span><br><span class="line">    <span class="keyword">global</span> receive_first</span><br><span class="line">    <span class="keyword">if</span> len(sys.argv[<span class="number">1</span>:] != <span class="number">5</span>):</span><br><span class="line">        print(<span class="string">"Use python3 proxy.py local_host local_port remote_host remote_port receive_first"</span>)</span><br><span class="line">        print(<span class="string">"Example:python3 proxy.py 127.0.0.1 8899 12.34.34.1 8888 True"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        local_host = sys.argv[<span class="number">1</span>]</span><br><span class="line">        local_port = sys.argv[<span class="number">2</span>]</span><br><span class="line">        remote_host = sys.argv[<span class="number">3</span>]</span><br><span class="line">        remote_port = sys.argv[<span class="number">4</span>]</span><br><span class="line">        receive_first = sys.argv[<span class="number">5</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"True"</span> <span class="keyword">in</span> receive_first:</span><br><span class="line">        receive_first = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        receive_first = <span class="literal">False</span> </span><br><span class="line">    server_loop()</span><br></pre></td></tr></table></figure></p>
-<p>server_loop<br>开启TCP服务，绑定在local_host,local_port,然后建立对等连接套接字接受来自客户端的连接，同时连接远程的服务端并且开启多线程，调用执行转发数据的函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">server_loop</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        server = socket.socket()</span><br><span class="line">        server.bind((local_host,local_port))</span><br><span class="line">        server.listen(<span class="number">10</span>)</span><br><span class="line">        print(<span class="string">"[*]listen on %s:%d"</span> % (local_host,local_port))</span><br><span class="line">    <span class="keyword">except</span> :</span><br><span class="line">        print(<span class="string">"Failed to listen on %s:%d"</span> % (local_host,local_port))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        client_socket, addr = server.accept()</span><br><span class="line">        print(<span class="string">"[*]Connect from %s:%d"</span> % (addr[<span class="number">0</span>],addr[<span class="number">1</span>]))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            server_socket = socket.socket()</span><br><span class="line">            server_socket.connect((remote_host,remote_port))</span><br><span class="line">            print(<span class="string">"[*]Connect to %s:%d"</span> % (remote_host,remote_port))</span><br><span class="line">        <span class="keyword">except</span> :</span><br><span class="line">            print(<span class="string">"Failed to connect to %s:%d"</span> % (remote_host,remote_port))</span><br><span class="line">        print(<span class="string">"----------------------------"</span>)</span><br><span class="line">        client_thread = threading.Thread(target=proxy_handler,args=(client_socket,server_socket))</span><br><span class="line">        client_thread.start()</span><br></pre></td></tr></table></figure></p>
-<p>proxy_handler<br>接受来自双方的数字，打印出数据询问是否修改，若不修改直接发送，发送为两个被调函数send_client，send_server，向客户端发送与向服务端发送<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proxy_handler</span><span class="params">(client_socket,server_socket)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> receive_first</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> receive_first:</span><br><span class="line">            send_client(server_socket,client_socket)</span><br><span class="line">            receive_first = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                send_server(client_socket,server_socket)</span><br><span class="line">                send_client(server_socket,client_socket)</span><br><span class="line">                <span class="keyword">if</span> flag1 == <span class="literal">True</span> <span class="keyword">and</span> flag2 == <span class="literal">True</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag1 == <span class="literal">True</span> <span class="keyword">and</span> flag2 == <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
-<p>send_client<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_client</span><span class="params">(server_socket,client_socket)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> flag1</span><br><span class="line">    server_data = <span class="string">""</span></span><br><span class="line">    server_data = receive_from(server_socket)</span><br><span class="line">    print(server_data)</span><br><span class="line">    a = input(<span class="string">"[*]if modify the data;[y/n]"</span>)</span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">'y'</span>:</span><br><span class="line">        server_data = input()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> len(server_data):</span><br><span class="line">        print(<span class="string">"[&lt;==]sending %d bytes to %s"</span> % (len(server_data),local_host))</span><br><span class="line">        client_socket.send(server_data.encode())</span><br><span class="line">        <span class="keyword">if</span> server_data == <span class="string">'over'</span>:</span><br><span class="line">            server_socket.close()</span><br><span class="line">            flag1 = <span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
-<p>send_server<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_server</span><span class="params">(client_socket,server_socket)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> flag2</span><br><span class="line">    client_data = <span class="string">""</span></span><br><span class="line">    client_data = receive_from(client_socket)</span><br><span class="line">    print(client_data)</span><br><span class="line">    a = input(<span class="string">"[*]if modify the data;[y/n]"</span>)</span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">'y'</span>:</span><br><span class="line">        server_data = input()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> len(client_data):</span><br><span class="line">        print(<span class="string">"[==&gt;]sending %d bytes to %s"</span> % (len(client_data),remote_host))</span><br><span class="line">        server_socket.send(client_data.encode())</span><br><span class="line">        <span class="keyword">if</span> client_data == <span class="string">'over'</span>:</span><br><span class="line">            client_socket.close()</span><br><span class="line">            flag2 = <span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
-<p>receive_from<br>接受数据，这里设置了超时时间达到非阻塞的效果<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">receive_from</span><span class="params">(conn_socket)</span>:</span></span><br><span class="line">    conn_socket.settimeout(<span class="number">3</span>)</span><br><span class="line">    data = <span class="string">""</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            buffer = conn_socket.recv(<span class="number">4096</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> buffer:</span><br><span class="line">                data += buffer</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure></p>
-<p>客户端代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">client = socket.socket()</span><br><span class="line">client.connect((<span class="string">'127.0.0.1'</span>,<span class="number">8899</span>))</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    data = client.recv(<span class="number">4096</span>).decode()</span><br><span class="line">    <span class="keyword">if</span> data <span class="keyword">and</span> data != <span class="string">'over'</span>:</span><br><span class="line">        print(data)</span><br><span class="line">        client.send(<span class="string">b'hello world'</span>)</span><br><span class="line">    <span class="keyword">if</span> data == <span class="string">'over'</span>:</span><br><span class="line">        client.send(<span class="string">b'over'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">client.close()</span><br></pre></td></tr></table></figure></p>
-<p>服务端代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">server = socket.socket()</span><br><span class="line">server.bind((<span class="string">''</span>,<span class="number">8899</span>))</span><br><span class="line">server.listen(<span class="number">10</span>)</span><br><span class="line">client, addr = server.accept()</span><br><span class="line">client.send(<span class="string">b'hello world'</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	data = client.recv(<span class="number">4096</span>).decode()</span><br><span class="line">	<span class="keyword">if</span> data <span class="keyword">and</span> data != <span class="string">'over'</span>:</span><br><span class="line">		print(data)</span><br><span class="line">		client.send(<span class="string">b'over'</span>)</span><br><span class="line">	<span class="keyword">if</span> data == <span class="string">'over'</span>:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">		</span><br><span class="line">client.close()</span><br></pre></td></tr></table></figure></p>
+        <h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><p><strong>1.提供给网络层的服务</strong>：</p>
+<blockquote>
+<p>无确认无连接的服务 LAN<br>有确认无连接的服务 WLAN<br>有确认面向连接的服务 PtoP link</p>
+</blockquote>
+<p><strong>2.成帧</strong></p>
+<blockquote>
+<p>为什么要成桢：<br>1.将数据变得更小<br>2.避免信道长期被占领</p>
+</blockquote>
+<p>成帧由网络适配器实现。<br>成帧：标志/记法 问题：确定一帧的开始和结束分界<br>方法：<br>1.字节计数法<br>2.字节填充的标志字节法<br>3.比特填充的标志比特法<br>4.物理层编码违禁法</p>
+<blockquote>
+<p>字节计数法<br>基于计数器<br>在帧的头部给出帧的长度。<br>问题：<br>出错后无法同步</p>
+</blockquote>
+<blockquote>
+<p>字节填充的标志字节法<br>在帧的头部和尾部添加FLAG，如果FLAG出现在数据中，在FLAG前加ESC，如果数据中出现ESC，就在ESC前加ESC。</p>
+</blockquote>
+<blockquote>
+<p>比特填充的标志比特法<br>01111110作为帧的开始，数据中每出现5个连续的1加一个0，保证数据中不会出现6个连续的1.</p>
+</blockquote>
+<blockquote>
+<p>流量控制<br>发送者比接收者快<br>解决：<br>1.基于反馈的流量控制<br>2.基于速率的流量控制</p>
+</blockquote>
+<p><strong>3.差错控制</strong>：</p>
+<blockquote>
+<p>海明距离：<br>码距：两个码字之间不同的代码数（异或）<br>一组码字编码，可得到任意两个的海明距离，其中最小的海明距离称为该码字编码的海明距离。<br>检错能力：<br>奇偶检验：检验出d位数据错误，需要海明距离为d+1<br>纠正d位错误，需要海明距离为2d+1</p>
+</blockquote>
+<blockquote>
+<p>CRC检错码<br>1.多项式编码<br>2.生成多项式 最高位最低位必须为1<br>3.计算检验和T(x)<br>能检查出所有单bit错<br>能检查出全部离散的2bit错<br>能检查出全部奇数个错<br>能检查出全部长度小于或等于K位的突发错（K是生成多项式的阶）<br>能以1-1/2k-1的概率检查出长度为K+1位的突发错</p>
+</blockquote>
+<p><strong>4.基本数据链路层协议</strong>：</p>
+<blockquote>
+<p>乌托邦式的单工协议<br>数据单向传递，接收能力无限，信道不会出错</p>
+</blockquote>
+<blockquote>
+<p>无错信道上的单工停等式协议<br>数据单向传递，接收能力有限，信道不会出错<br>需要流量控制：等待ACK到了再发<br>不需要流量控制：不需要等待ACK</p>
+</blockquote>
+<blockquote>
+<p>有错信道上的单工停等式协议<br>数据单向传递，接收能力有限，信道会出错<br>正常传输 接收方发送ACK，发送方接着发下一帧<br>数据帧损坏 接收方发送NAK，发送方重发<br>数据帧丢失 计时器超时，重传<br>确认帧丢失 计时器超时，重传，接收方丢弃重复帧，再发ACK<br>优点：比较简单<br>缺点：信道利用率低</p>
+</blockquote>
+<p>滑动窗口协议</p>
+<blockquote>
+<p>有噪声信道的全双工协议<br>全双工数据传输，网络层处理数据能力有限，信道不可靠<br>捎带确认，节省带宽<br>问题：<br>1.能保证无差错传输但是还是基于停等式<br>2.若双方同时发送，会有一半的重复帧<br>3.效率低，传输时间长</p>
+</blockquote>
+<blockquote>
+<p>滑动窗口协议<br>全双工数据传输，网络层处理数据能力有限，信道不可靠，传播时间不能忽略<br>在等待确认的时候，继续发送数据（管道化）<br>退后N：<br>发送窗口&gt;1，接受窗口=1，发送窗口大小小于序号<br>某一帧没有收到或者出错，发送方重传那一帧后的所有帧。<br>选择重传：<br>发送窗口&gt;1，接受窗口&gt;1<br>捎带确认,添加ack-timer，在计时器超时前没有数据到达，单独发送一个确认帧<br>某一帧出错或者没有收到，发送方只重发那一帧，接收方先把乱序的缓存起来再一起向上层提交。<br>新老窗口不重叠</p>
+</blockquote>
+<h2 id="mac子层"><a href="#mac子层" class="headerlink" title="mac子层"></a>mac子层</h2><p>在多路访问信道上确定该谁发送称为Mac子层<br>在点到点链路中不需要mac子层，Mac子层用于广播或者共享信道，LAN需要Mac子层</p>
+<p><strong>1.信道分配问题</strong>：</p>
+<blockquote>
+<p>静态信道分配：FDM（频分多路复用），TDM（时分多路复用）<br>动态信道分配：随机接入，受控接入<br>受控接入：<br>轮询，预约，令牌传递<br>随机接入：<br>采用随机选择的方式，防止和别的计算机发生冲突<br>ALOHA,CSMA/CD,CSMA/CA</p>
+</blockquote>
+<p><strong>2.协议</strong>：</p>
+<blockquote>
+<p>ALOHA<br>纯ALOHA：<br>1.当用户有数据要发送就让他们传输<br>2.会发生冲突<br>3.发送方监听信道，发现毁坏的帧，等待随机的时间重发<br>分槽ALOHA：<br>1.将时间分成离散的间隔<br>2.用户在时槽开始才能发送数据<br>3.发送方监听信道，发现毁坏的帧，等待随机的时</p>
+</blockquote>
+<blockquote>
+<p>载波侦听多路访问协议CSMA<br>ALOHA缺点：每个站点随意发送数据，不关心其他站是否也在发送<br>CSMA：发送前监听信道是否存在载波，并采取相应的动作。<br>1.坚持CSMA：<br>1-坚持CSMA<br>非坚持CSMA<br>p-坚持CSMA</p>
+</blockquote>
+<p>2.具有冲突检测的CSMA</p>
+<blockquote>
+<p>1-坚持CSMA<br>发送数据时首先监听信道<br>如果信道闲，发送数据<br>如果信道忙，继续监听，直到信道空闲<br>若发生冲突，等待随机时间，然后重新开始发送过程<br>优点：减少信道空闲时间，信道利用率高于ALOHA</p>
+</blockquote>
+<blockquote>
+<p>非坚持CSMA<br>发送数据时首先监听信道<br>如果信道闲，发送数据<br>如果信道忙，等待随机的时间，重新开始发送过程<br>若发生冲突，等待随机时间，然后重新开始发送过程<br>优点：减少了冲突的概率<br>缺点：增加信道空闲时间，数据发送延迟增大</p>
+</blockquote>
+<blockquote>
+<p>p-坚持CSMA<br>发送数据时首先监听信道<br>如果信道闲，以概率p发送数据，以概率q=1-p延迟至下一个时槽发送<br>如果信道忙，等待下一个时槽，重新开始发送过程<br>若发生冲突，等待随机时间，然后重新开始发送过程</p>
+</blockquote>
+<blockquote>
+<p>具有冲突检测的CSMA<br>CSMA/CD广泛的应用于以太网中<br>先听后发，边发边听，冲突停发，随机延迟后重发。<br>冲突检测：<br>边发送边侦听，一旦检测到冲突立即停止发送数据<br>检测到冲突最长时间 2t<br>检测到冲突：二进制指数后退法<br>第i次冲突 等待时间随机选择0-2^i-1<br>信道三种状态:<br>传输周期 一个站点使用，其他的禁止使用<br>竞争周期 所有站点争用时间槽<br>空闲周期 所有站点都不使用信道</p>
+</blockquote>
+<p><strong>3.无冲突协议</strong>：</p>
+<blockquote>
+<p>1.二进制位图<br>序号（地址大的）先发送<br>N个站，每一个站有一个二进制地址地址范围从0 - N-1<br>在竞争期：每一个站从最高位开始广播二进制地址，每次1比特，同时将所有站的本bit进行异或运算<br>仲裁规则：在他的地址位中，一个值为0的被改写为1，就放弃发送，获得发送权后就发送一帧，然后开始新的竞争</p>
+</blockquote>
+<blockquote>
+<p>令牌环局域网<br>环形拓扑-令牌的传送<br>一台计算机获得了令牌才能发送数据</p>
+</blockquote>
+<p><strong>4.无线局域网协议</strong>：</p>
+<blockquote>
+<p>无线局域网能否搬用CSMA/CD<br>隐蔽站，暴漏站</p>
+</blockquote>
+<blockquote>
+<p>冲突避免多路访问MACA<br>对信道进行预约避免冲突<br>RTS 发送站在发送数据之前先发送一个短的通告（包含发送地址，接收地址，要发送的数据长度）<br>CTS 接收站收到准备接受，发送响应，其他站检测到CTS就不能发送</p>
+</blockquote>
+<p><strong>5.以太网</strong>：<br>以太网的MAC层：<br>1.数据帧的封装和解封装<br>2.实现和维护MAC协议<br>3.比特差错检测<br>4.寻址<br>媒体访问控制方法：<br>1-坚持CSMA/CD</p>
+<blockquote>
+<p>以太网帧格式<br>先导域标记帧 8字节 提供时钟同步<br>目的地址 6字节<br>源地址 6字节 MAC地址-24位厂商代码，24位序列号<br>类型 2字节 标志上一层使用什么协议 0800-IP，0806-ARP 802.3中如果数值小于1500就表示帧的长度<br>数据 46-1500字节<br>CRC 4字节<br>无效MAC帧：<br>1.数据字段的长度和长度的值不一样<br>2.帧的长度不是整数字节<br>3.CRC出错<br>4.数据字段长度不在46-1500<br>5.有效MAC长度不在64-1518</p>
+</blockquote>
+<p><strong>6.无线局域网WLAN</strong>：<br>1.有固定基础设施的无线局域网<br>一个基本服务集BSS包括一个基站和若干移动站<br>所有站在本BSS内可以直接通信<br>和本BSS外的站通信时需要经过本BSS的基站</p>
+<p>基本服务集中的基站叫接入点AP，当网络管理员安装AP时必须为该AP分配一个不超过32字节的SSID和一个信道。</p>
+<p>一个服务集可以通过接入点AP连接到主干分配系统DS，再接入另一个基本服务集，构成拓展的服务集ESS</p>
+<p><strong>7.802.11 MAC子层协议</strong>：<br>两种模式<br>DCF（分布式协调功能）竞争<br>PCF （点协调功能）无竞争</p>
+<blockquote>
+<p>DCF CSMA/CA<br>采用随机退避避免冲突 0 - 2^(2+i)-1<br>接收端要给确认<br>信道忙时减少发送<br>动态调整传输速率<br>发送短帧<br>原理：<br>1.站点发送它的第一个 MAC 帧时，若检测到信道空闲，则在等待DIFS时间可发送帧<br>2.否则,执行退避算法<br>若检测到信道忙，就冻结退避计时器<br>若检测到信道空闲,退避计时器开始倒计时<br>3.如果退避计时器的时间减小到零时，就开始发送整个数据帧,等待确认<br>4.收到确认，成功<br>5.未收到确认，执行退避算法发送重传帧</p>
+</blockquote>
+<p><strong>8.网桥</strong>：<br>可以将LAN互联起来的设备叫网桥<br>作用：<br>1.扩大物理范围<br>2.隔离冲突域<br>3.互连不同类型的网络<br>4.提高kekaox<br>5.性能改善<br>对帧操作</p>
+<blockquote>
+</blockquote>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2019/05/10/自己动手写工具(2)--TCP代理/">http://yoursite.com/2019/05/10/自己动手写工具(2)--TCP代理/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2019/05/10/自己动手写工具(2)--TCP代理/">May 10th 2019, 8:41:15 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/05/10/自己动手写工具(2)--TCP代理/">June 13th 2019, 10:43:36 am</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/07/11/数据链路层知识总结/">http://yoursite.com/2019/07/11/数据链路层知识总结/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/07/11/数据链路层知识总结/">July 11th 2019, 8:16:17 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/07/11/数据链路层知识总结/">July 12th 2019, 9:23:30 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -428,17 +515,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/05/22/素数个数求解与素数的判定/" title="素数个数求解与素数的判定">
-                    <div class="nextTitle">素数个数求解与素数的判定</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/05/10/CTF中的编码总结/" title="CTF中的编码总结">
-                    <div class="prevTitle">CTF中的编码总结</div>
+                <a href="/2019/07/08/应用层知识总结/" title="应用层知识总结">
+                    <div class="prevTitle">应用层知识总结</div>
                 </a>
             
         </li>
@@ -552,7 +634,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据链路层"><span class="toc-number">1.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mac子层"><span class="toc-number">2.</span> <span class="toc-text">mac子层</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
