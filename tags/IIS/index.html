@@ -346,298 +346,29 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/04/windows2018R2读书笔记/">
+        <a class="abstract-title" href="/2019/07/31/win2008Server搭建IIS及配置/">
             
-                <span>windows2018R2读书笔记</span>
+                <span>win2008Server搭建IIS及配置</span>
         </a>
         <div class="abstract-content">
-            最近在学习内网渗透，发现自己对于这个方向之前有很大的误解，以为用工具扫扫就可以了，没有深入的理解，所以决定从原理上学习Windows的域控。我这次读的书是《Windows Server 2008 R2 Active Directory配置指南》。由于时间有限我只读以下章节：
-第1章  Active Directory域服务（AD DS）第2章  建立AD DS域第3章  域用户与组账户的管理第8章  管理域和林信任第10章  操作主机的管理。下面就是我对一些重要概念的理解，以及自己实践的记录。
-第一章 Active Directory域服务1.1 AD域服务概述Directory Ser...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="windows,域控,内网渗透">windows,域控,内网渗透</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/02/Linux下的iptables详解/">
-            
-                <span>Linux下的iptables详解</span>
-        </a>
-        <div class="abstract-content">
-            最近在写DNS欺骗的小工具，突然遇到了Linux下的iptables，之前没有听过这个，所以专门查了这方面的知识，在这里做一个整理。
-防火墙的概念从逻辑上讲。防火墙可以大体分为主机防火墙和网络防火墙。主机防火墙：针对于单个主机进行防护。网络防火墙：往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。网络防火墙和主机防火墙并不冲突，可以理解为，网络防火墙主外（集体）， 主机防火墙主内（个人）。从物理上讲，防火墙可以分为硬件防火墙和软件防火墙。硬件防火墙：在硬件级别实现部分防火墙功能，另一部分功能基于软件实现，性能高，成本高。软件防火墙：应用软件处理逻辑运行于通用硬...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="防火墙,iptables">防火墙,iptables</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/27/自己动手写工具(3)--ARP欺骗/">
-            
-                <span>自己动手写工具(3)--ARP欺骗</span>
-        </a>
-        <div class="abstract-content">
-            最近在计网里学习了ARP协议，为了加深理解，所以决定自己写一个ARP的欺骗工具（有的地方也可以翻译成ARP投毒）。
-##ARP协议首先介绍一下ARP协议的定义，先看一下网络的结构模型
+            IIS安装在服务器管理器中添加角色，然后添加web服务器，安装。安装完毕后，访问127.0.0.1可以看到IIS的界面
+IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新建一个站点。
+在设置站点下放置一个html文件
+在浏览器中访问站点，可以正常访问
+开启目录浏览在网页的功能视图中找到目录浏览双击，打开目录浏览
+在网站根目录中放置一个图片，打开浏览器可以对其下载
 
-ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路层还是网络层是众说纷纭所以不必纠结这个地方。在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP/IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/31</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,arp_poison">工具,python,arp_poison</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">
-            
-                <span>使用动态规划(DP)解决最大公共子串与最大公共子序列问题</span>
-        </a>
-        <div class="abstract-content">
-            
-我们从一道题目来引入我们今天的内容首先介绍一下子串和子序列的区别对于两个字符串 ABCDEF BCYHEF子序列为字符串中 一定顺序的字符不一定相连子串为字符串中相连的字符所以他们的最大公共子序列为 BCEF最大公共子串为 BC或者EF那么对于求解最大公共子串和最大公共子序列用什么方法呢，可能我们最开始想到的就是不断的枚举两个的子串或者子序列，再比较哪个最长，这个方法也不是不行，但是对于两个长度分别为n,m的字符串，这个算法的时间复杂为n^m 显然时间复杂度太大，在ACM中这种算法一定会超时的。那么我们怎么优化呢？我们发现在枚举的过程中，其实我们其实一直都在重复一个操作，那就是枚举子串...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="动态规划(DP)">动态规划(DP)</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/22/素数个数求解与素数的判定/">
-            
-                <span>素数个数求解与素数的判定</span>
-        </a>
-        <div class="abstract-content">
-            1.素数质数（Prime number），又称素数，指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数（也可定义为只有1与该数本身两个正因数的数）。对于写代码的人来说，素数比想像中的更重要，Google一下BigPrime或者big_prime你总会发现大堆大堆用到了素数常量的程序代码。平时没事时可以记一些素数下来以 备急用。我会选一些好记的素数，比如4567, 124567, 3214567, 23456789, 55566677, 1234567894987654321, 11111111111111111111111 (23个1)。   　　素数有很多神奇的性质。我...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="概率法求素数,算法">概率法求素数,算法</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">
-            
-                <span>自己动手写工具(2)--TCP代理</span>
-        </a>
-        <div class="abstract-content">
-            ##TCP代理的简介这次的博客给大家再介绍一个TCP代理的小工具，TCP代理是什么呢，就是处在应用层上位于真正的服务器和客户端之间用TCP的方式将流量从一个机子转到另一个机子，可以起到监控流量，修改数据包的功能。代理服务器还有一个重要的作用就是隐藏背后的真正服务器，使服务器免受攻击。假如代理服务器挂了，后面的服务器仍然可以正常运行，而且如果背后的服务器还拥有多台代理服务器就会使自己更加安全。
-##实现的原理1.代理先开启一个TCP服务2.客户端先去连接代理3.代理在与客户端取得连接后立即与远程的服务端建立TCP链接4.无论是客户端还是服务端发送数据都是先发送到代理然后代理再决...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,proxy">工具,python,proxy</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/10/CTF中的编码总结/">
-            
-                <span>CTF中的编码总结</span>
-        </a>
-        <div class="abstract-content">
-            这段时间做的web题比较多，遇到了很多编码的题，所以这里总结一下web方向常用到的编码知识
-1.URL编码首先当我们要去学习一个编码的时候需要知道为什么这里需要编码，通常我们编码的原因是：压缩传输，避免敏感信息泄漏，避免引起歧义等。URL编码顾名思义就是在URL里的编码，为什么要使用URL编码主要是为了避免引起歧义，比如我们在发送GET请求时 /?a=123&amp;b=234 这里我们传递了两个整数给变量a,b，看似没有问题，如果我们要传递的数据里有？或者&amp;就会引起歧义，浏览器就不知道怎么解析了，所以引入了URL编码，将会引起歧义的地方换成URL编码。URL编码也叫百分号编码，...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,编码">ctf,web,编码</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/28/一次信息收集之绕过CDN查询真实ip/">
-            
-                <span>一次信息收集之绕过CDN查询真实ip</span>
-        </a>
-        <div class="abstract-content">
-            获取IP地址首先拿到一个网址做信息收集的时候，第一步就是获得目标服务器的IP地址，这个是我们进行进一步社工或者渗透的基础。查询IP的网站有很多，我常用的比如 http://ping.chinaz.com，http://whois.chinaz.com，都可以做域名的DNS解析，但是一些网站为了增加访问速度以及隐藏真正的IP地址会做CDN，CDN就是一个网站的一个文本缓存服务器，我们通常直接访问到的就是CDN服务器，那么如何判断对方网站是不是做了CDN呢，常用的方法比如多地PING，域名解析，我在这里给大家演示一下多地ping的方法，这个方法借助一些在线的平台比如 ，https://asm...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/28</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="信息收集,社会工程学">信息收集,社会工程学</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/25/信息收集之DNS域名解析/">
-            
-                <span>信息收集之DNS域名解析</span>
-        </a>
-        <div class="abstract-content">
-            我们在做信息收集的时候通常只能获得目标的域名，那么如何获取对方真正的IP地址呢，最常用的方法就是DNS解析，获得对方的IP地址（在不考虑对方部署了CDN的情况下）
-DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DNS，就是Domain Name System的缩写，翻译过来就是域名系统，是互联网上一个关于IP和域名相互映射的分布式数据库，DNS能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过域名，最终得到该域名对应的IP地址的过程叫做域名解析（或主机名解析）。
-上图就是一个DNS解析过程
-下面介绍关于DNS的一些基本概念:
-一.域的划分1.根...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="信息收集,社会工程学">信息收集,社会工程学</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/23/自己动手写工具(1)--Netcat/">
-            
-                <span>自己动手写工具（1）--Netcat</span>
-        </a>
-        <div class="abstract-content">
-            一直以来都是在用别人写好的工具，为了锻炼自己的编程能力以及更加深刻的理解网络，所以我准备做一个长期的写工具计划。第一个工具呢就是仿照一个类似于netcat的网络连接工具Pdao，netcat被称为网络界的“瑞士军刀”，功能十分丰富，我的工具参考了NC的功能，主要有如下几种功能：1.服务端的监听2.上传文件3.反弹shell4.下载文件
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,Netcat">工具,python,Netcat</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="IIS">IIS</a>
     
 </div>
             
@@ -645,10 +376,6 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">NEXT &#62;</a>
-    </nav>
     
 </main>
             <!-- profile -->
