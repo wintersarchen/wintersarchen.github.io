@@ -346,6 +346,67 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/06/04/windows2018R2读书笔记/">
+            
+                <span>windows2018R2读书笔记</span>
+        </a>
+        <div class="abstract-content">
+            最近在学习内网渗透，发现自己对于这个方向之前有很大的误解，以为用工具扫扫就可以了，没有深入的理解，所以决定从原理上学习Windows的域控。我这次读的书是《Windows Server 2008 R2 Active Directory配置指南》。由于时间有限我只读以下章节：
+第1章  Active Directory域服务（AD DS）第2章  建立AD DS域第3章  域用户与组账户的管理第8章  管理域和林信任第10章  操作主机的管理。下面就是我对一些重要概念的理解，以及自己实践的记录。
+第一章 Active Directory域服务1.1 AD域服务概述Directory Ser...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="windows,域控,内网渗透">windows,域控,内网渗透</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/06/02/Linux下的iptables详解/">
+            
+                <span>Linux下的iptables详解</span>
+        </a>
+        <div class="abstract-content">
+            最近在写DNS欺骗的小工具，突然遇到了Linux下的iptables，之前没有听过这个，所以专门查了这方面的知识，在这里做一个整理。
+防火墙的概念从逻辑上讲。防火墙可以大体分为主机防火墙和网络防火墙。主机防火墙：针对于单个主机进行防护。网络防火墙：往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。网络防火墙和主机防火墙并不冲突，可以理解为，网络防火墙主外（集体）， 主机防火墙主内（个人）。从物理上讲，防火墙可以分为硬件防火墙和软件防火墙。硬件防火墙：在硬件级别实现部分防火墙功能，另一部分功能基于软件实现，性能高，成本高。软件防火墙：应用软件处理逻辑运行于通用硬...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="防火墙,iptables">防火墙,iptables</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/27/自己动手写工具(3)--ARP欺骗/">
             
                 <span>自己动手写工具(3)--ARP欺骗</span>
@@ -577,67 +638,6 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,Netcat">工具,python,Netcat</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/sqli-labs/">
-            
-                <span>sqli-labs 通关详解</span>
-        </a>
-        <div class="abstract-content">
-             CTF-web学习笔记之 sqli-labs第一关：第一关如图首先可以判断这里接受的是一个GET请求，先在1后面加一个’ 发现报错，说明这里没有过滤掉引号，所以这里是一个注入点SQL注入通常有两种类型，整形注入和字符型注入，那么判断这里是哪种注入就要分析这里的报错语句，报错信息中共有5个单引号，”实际上是两个单引号，最外面的两个是报错信息的提示引号，’1’两边的引号是后台代码的引号，多出来的就是我们加上的，因为这里给输入的1加上了引号所以后台接受的是字符型，那么我们在后续的注入中需要加 ‘ 来闭合后面的引号
-接下来需要判断表中有几列，通常使用order by加数字 1 2 3 4 5一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,sql注入">ctf,web,sql注入</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/19/python下多核/">
-            
-                <span>python下多核，单核CPU对于并行，并发执行效率的对比</span>
-        </a>
-        <div class="abstract-content">
-            这篇博客主要内容为python 中多线程以及多进程的效率对比，以及记录自己在做这个实验中遇到的一些问题以及心得
-背景引入：CPU制造商为了追求CPU效率放弃了在CPU频率上的追求（CPU频率即CPU单位时间内可以完成任务的多少），反而开始把方向转向了多核CPU上。那么如何在多核CPU上充分发挥出多核的优势就成了一个问题。
-首先是简单介绍下多线程与多进程：线程：是程序执行流的最小单元，是系统独立调度和分配CPU（独立运行）的基本单位。线程(有时被称为轻量级进程)跟进程有些相似，不同的是，所有的线程运行在同一个进程中， 共享相同的运行环境。它们可以想像成是在主进程或“主线程”中并行运行的“迷...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="python,多线程">python,多线程</a>
     
 </div>
             
@@ -1007,9 +1007,21 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1022,6 +1034,16 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href="/2019/07/31/LAMP安装及配置/">LAMP安装及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href="/2019/07/31/win2008Server搭建IIS及配置/">win2008Server搭建IIS及配置</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1080,22 +1102,22 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
         </li>
     
     
@@ -1115,12 +1137,12 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/sqli-labs/">sqli-labs 通关详解</a>
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/python下多核/">python下多核，单核CPU对于并行，并发执行效率的对比</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/python下多核/">python下多核，单核CPU对于并行，并发执行效率的对比</a>
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/sqli-labs/">sqli-labs 通关详解</a>
         </li>
     
     
@@ -1133,11 +1155,13 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
-    
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux,LAMP"><span class="iconfont-archer">&#xe606;</span>Linux,LAMP</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
@@ -1149,9 +1173,9 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
         <span class="sidebar-tag-name" data-tags="应用层,计算机网络"><span class="iconfont-archer">&#xe606;</span>应用层,计算机网络</span>
     
-        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
-    
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
+    
+        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
     
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
     
@@ -1165,11 +1189,11 @@ DNS域名解析是互联网上非常重要的一项服务，那么是DNS呢：DN
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

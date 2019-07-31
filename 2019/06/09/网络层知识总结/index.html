@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">4.8k</span>阅读时长: <span class="post-count reading-time">17 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">5.1k</span>阅读时长: <span class="post-count reading-time">18 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -565,6 +565,23 @@ height:50vh;
 <blockquote>
 <p>traceroute命令<br>原理 ICMP超时报文+TTL<br>判断何时到达目的主机：<br>1.发送方的探测报文中使用ICMP echo request 中间路由器返回ICMP超时报文，目标返回ICMP echo replay<br>2.利用UDP报文<br>源端发送UDP报文，使用一个不可能的端口，到达目的主机后，产生端口不可达的报文。</p>
 </blockquote>
+<p><strong>28.组播</strong></p>
+<blockquote>
+<p>组播：一对多<br>组播的应用场合：<br>视频会议<br>向订阅者发送新闻<br>资源发现 OSPF，RIP<br>客户对不知道的服务器请求 BOOTP</p>
+</blockquote>
+<blockquote>
+<p>组播的特征：<br>1.组播可以跨越多个物理网络<br>2.每个组播群组共享唯一的D类地址<br>3.群组成员是动态的<br>4.任意主机可向任意群组发送数据</p>
+</blockquote>
+<blockquote>
+<p>IP组播地址格式：<br>D类地址 224-239<br>每一个组播群组对应一个唯一的D类地址<br>地址没有结构也没有管理信息<br>组播地址只用作目的地址<br>不生成关于组播数据报的ICMP报文</p>
+</blockquote>
+<blockquote>
+<p>硬件组播地址<br>01.00.5e.00.00.00 - 01.00.5e.7f.ff.ff<br>将IP组播地址的低23位映射到以太网组播的低23位</p>
+</blockquote>
+<p><strong>29.IGMP</strong>：</p>
+<blockquote>
+<p>解决组播有效的通知和交付机制的问题<br>作用：<br>1.在主机和路由器之间，负责报告动态组播成员的信息<br>主机加入或退出群组向路由器报告，路由器也可以主动查询</p>
+</blockquote>
 
     </article>
     <!-- license  -->
@@ -573,7 +590,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">http://yoursite.com/2019/06/09/网络层知识总结/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">June 9th 2019, 11:00:30 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">July 11th 2019, 2:01:15 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/06/09/网络层知识总结/">July 12th 2019, 11:33:58 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -985,9 +1002,21 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1000,6 +1029,16 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href="/2019/07/31/LAMP安装及配置/">LAMP安装及配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href="/2019/07/31/win2008Server搭建IIS及配置/">win2008Server搭建IIS及配置</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1058,22 +1097,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
         </li>
     
     
@@ -1093,12 +1132,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/sqli-labs/">sqli-labs 通关详解</a>
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/python下多核/">python下多核，单核CPU对于并行，并发执行效率的对比</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/python下多核/">python下多核，单核CPU对于并行，并发执行效率的对比</a>
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href="/2019/04/19/sqli-labs/">sqli-labs 通关详解</a>
         </li>
     
     
@@ -1111,11 +1150,13 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
-    
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux,LAMP"><span class="iconfont-archer">&#xe606;</span>Linux,LAMP</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
@@ -1127,9 +1168,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="应用层,计算机网络"><span class="iconfont-archer">&#xe606;</span>应用层,计算机网络</span>
     
-        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
-    
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
+    
+        <span class="sidebar-tag-name" data-tags="XCTF,逆向"><span class="iconfont-archer">&#xe606;</span>XCTF,逆向</span>
     
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
     
@@ -1143,11 +1184,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="概率法求素数,算法"><span class="iconfont-archer">&#xe606;</span>概率法求素数,算法</span>
     
-        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,arp_poison"><span class="iconfont-archer">&#xe606;</span>工具,python,arp_poison</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,sql注入"><span class="iconfont-archer">&#xe606;</span>ctf,web,sql注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="计算机网络,网络层"><span class="iconfont-archer">&#xe606;</span>计算机网络,网络层</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
