@@ -346,26 +346,32 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/07/08/应用层知识总结/">
+        <a class="abstract-title" href="/2019/08/01/SSH代理与端口转发/">
             
-                <span>应用层知识总结</span>
+                <span>SSH代理与端口转发</span>
         </a>
         <div class="abstract-content">
-            重点知识点：    DHCP ★★★★    DNS  ★★★★★    HTTP ★★★★★    WWW ★★★★★
-一.引导协议BOOTP：
+            木马配置与科来的使用实验环境：宿主机 win7   IP 172.20.10.8靶机   winXP  IP 172.20.10.6远控软件 PCshare
+首先使用PCshare生成木马，放置在winXP中
 
-1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。5.使用超时重传，重传使用指数退避策略。6.请求和响应报文不能分片（...
+
+在win7上需要关闭防火墙和安全服务，因为PCshare采用反弹shell，需要连接宿主机
+
+在winXP上点击木马，返回win7，发现肉鸡上线，开始远程控制
+
+使用科来软件来抓包
+SSH端口转发SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过 SSH 链接...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/08</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/01</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="应用层,计算机网络">应用层,计算机网络</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="SSH,端口转发">SSH,端口转发</a>
     
 </div>
             

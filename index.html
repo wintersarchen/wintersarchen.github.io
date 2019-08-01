@@ -359,6 +359,77 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/08/01/SSH代理与端口转发/">
+            
+                <span>SSH代理与端口转发</span>
+        </a>
+        <div class="abstract-content">
+            木马配置与科来的使用实验环境：宿主机 win7   IP 172.20.10.8靶机   winXP  IP 172.20.10.6远控软件 PCshare
+首先使用PCshare生成木马，放置在winXP中
+
+
+在win7上需要关闭防火墙和安全服务，因为PCshare采用反弹shell，需要连接宿主机
+
+在winXP上点击木马，返回win7，发现肉鸡上线，开始远程控制
+
+使用科来软件来抓包
+SSH端口转发SSH 会自动加密和解密所有 SSH 客户端与服务端之间的网络数据。但是，SSH 还同时提供了一个非常有用的功能，这就是端口转发。它能够将其他 TCP 端口的网络数据通过 SSH 链接...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/01</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="SSH,端口转发">SSH,端口转发</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/07/31/域控制器构建与配置/">
+            
+                <span>域控制器构建与配置</span>
+        </a>
+        <div class="abstract-content">
+            域控制器的安装首先在服务器添加角色中，添加AD域服务，然后在摘要中点击AD的安装向导，一直下一步，唯一的问题是机子需要设置静态IP，这个只需要在网络连接里设置静态的IP地址就好
+设置好AD域控服务器后，更改DNS的设置，方便之后设置辅额外域控服务器
+添加用户首先进入IIS配置界面，点进AD域服务，再点Users
+添加一个用户，用户名设置好之后，新建一个普通的win虚拟机，进入虚拟机点开网络设置，配置静态的DNS服务器，IP地址为AD域控制器的IP。
+重启机器，输入用户名密码即可加入域。在主域控服务器上，Users里新建三个组，分别命名为，WA，TX，RJ，每一个组下新建一个用户，即可将用...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/31</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="域控制器">域控制器</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/07/31/LAMP安装及配置/">
             
                 <span>LAMP安装及配置</span>
@@ -629,75 +700,6 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,传输层">计算机网络,传输层</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/10/2018火眼恶意代码逆向分析wp/">
-            
-                <span>2018火眼恶意代码逆向分析wp</span>
-        </a>
-        <div class="abstract-content">
-            Challenge 1发现是一个jar文件，那就说明这个题是一个java的反汇编，Java的好处就是你可以直接看到源码，所以分析起来就容易一些。使用Java的反汇编工具jd-gui
-直接看到源码，代码逻辑很简单，拿到flag
-
-‘GoldenTicket2018@flare-on.com’
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="逆向,恶意代码">逆向,恶意代码</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/09/网络层知识总结/">
-            
-                <span>网络层知识总结</span>
-        </a>
-        <div class="abstract-content">
-            网络层重点：虚电路与数据报网络的比较★★★☆☆最短路径算法★★★☆☆距离矢量算法★★★★★链路状态算法★★★★★IPv4协议★★★★★IP地址★★★★★Internet控制协议★★★★★OSPF——内部网关路由协议★★★☆☆Internet编址方式★★★★☆第四章  互联网协议IP★★★★★Internet控制报文协议ICMP★★★★★
-1.网络层的功能：
-
-1.将上层的报文段从源主机传输到目的主机，将报文段封装成分组2.控制子网（路由，拥塞控制，服务质量，网络互连）
-
-2.网络层设计的问题：
-
-1.存储转发数据包交换：LAN，WAN和Int的数据包交换基于分组的存储转发2.提供给传输层...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,网络层">计算机网络,网络层</a>
     
 </div>
             
@@ -1169,9 +1171,47 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 23
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -1184,6 +1224,16 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href="/2019/08/01/SSH代理与端口转发/">SSH代理与端口转发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href="/2019/07/31/域控制器构建与配置/">域控制器构建与配置</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1252,22 +1302,22 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/素数个数求解与素数的判定/">素数个数求解与素数的判定</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
+            <span class="archive-post-date">05/22</span><a class="archive-post-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">使用动态规划(DP)解决最大公共子串与最大公共子序列问题</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">自己动手写工具(2)--TCP代理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/10</span><a class="archive-post-title" href="/2019/05/10/CTF中的编码总结/">CTF中的编码总结</a>
         </li>
     
     
@@ -1305,23 +1355,27 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
-    
         <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
     
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
+    
+        <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
         <span class="sidebar-tag-name" data-tags="Linux,LAMP"><span class="iconfont-archer">&#xe606;</span>Linux,LAMP</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
     
-        <span class="sidebar-tag-name" data-tags="IIS"><span class="iconfont-archer">&#xe606;</span>IIS</span>
+        <span class="sidebar-tag-name" data-tags="SSH,端口转发"><span class="iconfont-archer">&#xe606;</span>SSH,端口转发</span>
     
         <span class="sidebar-tag-name" data-tags="windows,域控,内网渗透"><span class="iconfont-archer">&#xe606;</span>windows,域控,内网渗透</span>
+    
+        <span class="sidebar-tag-name" data-tags="IIS"><span class="iconfont-archer">&#xe606;</span>IIS</span>
     
         <span class="sidebar-tag-name" data-tags="信息收集,社会工程学"><span class="iconfont-archer">&#xe606;</span>信息收集,社会工程学</span>
     
         <span class="sidebar-tag-name" data-tags="动态规划(DP)"><span class="iconfont-archer">&#xe606;</span>动态规划(DP)</span>
+    
+        <span class="sidebar-tag-name" data-tags="域控制器"><span class="iconfont-archer">&#xe606;</span>域控制器</span>
     
         <span class="sidebar-tag-name" data-tags="应用层,计算机网络"><span class="iconfont-archer">&#xe606;</span>应用层,计算机网络</span>
     
@@ -1329,9 +1383,9 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
-        <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     

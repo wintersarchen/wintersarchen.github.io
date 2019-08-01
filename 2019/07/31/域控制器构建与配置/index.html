@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>HackPluto&#39;s Blog</title>
+    <title>域控制器构建与配置 · HackPluto&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">HackPluto&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">域控制器构建与配置</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">HackPluto's Blog</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/2.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            域控制器构建与配置
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="域控制器">域控制器</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">548</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/31</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,42 +399,64 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/07/08/应用层知识总结/">
-            
-                <span>应用层知识总结</span>
-        </a>
-        <div class="abstract-content">
-            重点知识点：    DHCP ★★★★    DNS  ★★★★★    HTTP ★★★★★    WWW ★★★★★
-一.引导协议BOOTP：
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="域控制器的安装"><a href="#域控制器的安装" class="headerlink" title="域控制器的安装"></a>域控制器的安装</h2><p>首先在服务器添加角色中，添加AD域服务，然后在摘要中点击AD的安装向导，一直下一步，唯一的问题是机子需要设置静态IP，这个只需要在网络连接里设置静态的IP地址就好<br><img src="https://s2.ax1x.com/2019/07/31/eNPHUA.png" alt><br><img src="https://s2.ax1x.com/2019/07/31/eNPLCt.png" alt><br><img src="https://s2.ax1x.com/2019/07/31/eNPoHH.png" alt></p>
+<p>设置好AD域控服务器后，更改DNS的设置，方便之后设置辅额外域控服务器<br><img src="https://s2.ax1x.com/2019/07/31/eNPb4I.png" alt></p>
+<h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>首先进入IIS配置界面，点进AD域服务，再点Users<br><img src="https://s2.ax1x.com/2019/07/31/eNoz60.png" alt></p>
+<p>添加一个用户，用户名设置好之后，新建一个普通的win虚拟机，进入虚拟机点开网络设置，配置静态的DNS服务器，IP地址为AD域控制器的IP。<br><img src="https://s2.ax1x.com/2019/07/31/eNoxlq.png" alt></p>
+<p>重启机器，输入用户名密码即可加入域。<br>在主域控服务器上，Users里新建三个组，分别命名为，WA，TX，RJ，每一个组下新建一个用户，即可将用户加入组中。<br><img src="https://i.loli.net/2019/08/01/5d41c3729ae8c59313.jpg" alt></p>
+<h2 id="添加辅助域控制器"><a href="#添加辅助域控制器" class="headerlink" title="添加辅助域控制器"></a>添加辅助域控制器</h2><p>首先再新建一个win2008Server,在主域控制器添加一个用户，设置好名字。<br>进入新建的服务器虚拟机，修改网络配置，同样使用静态IP，在DNS部分首选DNS服务器是主域控服务器的IP，备选DNS服务器为本机的IP地址。<br><img src="https://s2.ax1x.com/2019/07/31/eNovpn.png" alt></p>
+<p>修改计算机的名字，选择隶属的域<br><img src="https://s2.ax1x.com/2019/07/31/eNoXfs.png" alt><br>输入域控服务器的密码显示加入域成功<br><img src="https://s2.ax1x.com/2019/07/31/eNoOYj.png" alt><br>重启机器，再登录的时候需要登陆主域控服务器的名字。</p>
+<h2 id="添加子域控制器"><a href="#添加子域控制器" class="headerlink" title="添加子域控制器"></a>添加子域控制器</h2><p>添加子域控制器同样需要新建一个win2008Server虚拟机，在虚拟机中安装AD域服务<br>这一步和之前有所不同<br><img src="https://images2015.cnblogs.com/blog/435896/201611/435896-20161111202055061-1267000808.png" alt></p>
+<p>输入主域控制器域名test.com  —-  备用凭据 —- 设置  —- 输入主域控制器域管理员和密码进行验证。<br>验证通过选择下一步<br><img src="https://images2015.cnblogs.com/blog/435896/201611/435896-20161111202118983-818623115.png" alt><br>输入父域名  —-  输入子域控制器域名前面名称app  —– 下一步。<br>勾选DNS服务器(已经安装了DNS服务器AD会自动勾选)和全局编录 —- 下一步。</p>
+<p>设定AD活动目录还原密码 —- 下一步。</p>
+<p><img src="https://s2.ax1x.com/2019/07/31/eNPLCt.png" alt><br>完成后重新启动即可</p>
 
-1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。5.使用超时重传，重传使用指数退避策略。6.请求和响应报文不能分片（...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="应用层,计算机网络">应用层,计算机网络</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">HackPluto</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/07/31/域控制器构建与配置/">http://yoursite.com/2019/07/31/域控制器构建与配置/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/07/31/域控制器构建与配置/">July 31st 2019, 3:31:15 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/07/31/域控制器构建与配置/">August 1st 2019, 12:46:40 am</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/08/01/SSH代理与端口转发/" title="SSH代理与端口转发">
+                    <div class="nextTitle">SSH代理与端口转发</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/07/31/LAMP安装及配置/" title="LAMP安装及配置">
+                    <div class="prevTitle">LAMP安装及配置</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -453,6 +536,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域控制器的安装"><span class="toc-number">1.</span> <span class="toc-text">域控制器的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加用户"><span class="toc-number">2.</span> <span class="toc-text">添加用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加辅助域控制器"><span class="toc-number">3.</span> <span class="toc-text">添加辅助域控制器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加子域控制器"><span class="toc-number">4.</span> <span class="toc-text">添加子域控制器</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1054,6 +1155,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

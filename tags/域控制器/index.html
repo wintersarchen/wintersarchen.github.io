@@ -346,26 +346,27 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/07/08/应用层知识总结/">
+        <a class="abstract-title" href="/2019/07/31/域控制器构建与配置/">
             
-                <span>应用层知识总结</span>
+                <span>域控制器构建与配置</span>
         </a>
         <div class="abstract-content">
-            重点知识点：    DHCP ★★★★    DNS  ★★★★★    HTTP ★★★★★    WWW ★★★★★
-一.引导协议BOOTP：
-
-1.BOOTP是RATRP的替代协议，解决了RARP只能返回IP地址和不能被路由器转发的不足（迫使每一个局域网都得建立一个RARP服务器）2.基于UDP，要求计算校验和，客户端68端口，服务器67端口，通常和TFTP协同工作。3.无盘工作站启动时，用有限广播在本网广播BOOTP请求报文。4.客户端广播请求，服务器可以广播回应也可以在本机内设置一个ARP缓存然后定向单播应答。5.使用超时重传，重传使用指数退避策略。6.请求和响应报文不能分片（...
+            域控制器的安装首先在服务器添加角色中，添加AD域服务，然后在摘要中点击AD的安装向导，一直下一步，唯一的问题是机子需要设置静态IP，这个只需要在网络连接里设置静态的IP地址就好
+设置好AD域控服务器后，更改DNS的设置，方便之后设置辅额外域控服务器
+添加用户首先进入IIS配置界面，点进AD域服务，再点Users
+添加一个用户，用户名设置好之后，新建一个普通的win虚拟机，进入虚拟机点开网络设置，配置静态的DNS服务器，IP地址为AD域控制器的IP。
+重启机器，输入用户名密码即可加入域。在主域控服务器上，Users里新建三个组，分别命名为，WA，TX，RJ，每一个组下新建一个用户，即可将用...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/08</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/31</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="应用层,计算机网络">应用层,计算机网络</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="域控制器">域控制器</a>
     
 </div>
             
