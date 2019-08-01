@@ -346,311 +346,28 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/11/传输层知识总结/">
+        <a class="abstract-title" href="/2019/08/01/Pwn-栈溢出与canary/">
             
-                <span>传输层知识总结</span>
+                <span>Pwn--栈溢出与canary</span>
         </a>
         <div class="abstract-content">
-            传输层重点：传输层的作用★★端口★★★★UDP的特点★★★UDP报文格式★★TCP的特点★★★套接字★★★★TCP数据报的首部★★★★★TCP可靠传输的基本原理★★★滑动窗口的思想与原理★★★★拥塞控制的基本算法★★★★TCP连接的建立与释放★★★★★TCP中的定时器★★★★
-1.传输服务的功能：
+            栈溢出
+在计算机安全领域，缓冲区溢出是个古老而经典的话题。栈溢出是指在栈内写入超出长度限制的数据，从而破坏程序运行甚至获得系统控制权的攻击手段。为了实现栈溢出，要满足两个条件。第一，程序要有向栈内写入数据的行为；如gets(),read()等第二，程序并不限制写入数据的长度。
 
-提供给应用的端到端的服务IP地址复用情况下的实体通信增强网络层的服务：可靠传输，流控，拥塞控制
+函数调用栈
 
-2.引入传输层的必要性：
-
-1.由于IP是无连接的数据报投递系统，所以需要传输层提供服务质量更高的服务。2.传输层要提供识别应用程序的机制，由于IP传递的数据报中写的是目标的IP地址，无法区分...
+函数调用栈是指程序运行时内存一段连续的区域，用来保存函数运行时的状态信息，包括函数参数与局部变量等。称之为“栈”是因为发生函数调用时，调用函数（caller）的状态被保存在栈内，被调用函数（callee）的状态被压入调用栈的栈顶；在函数调用结束时，栈顶的函数（callee）状态被弹出，栈顶恢复到调用...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/11</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/01</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,传输层">计算机网络,传输层</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/10/2018火眼恶意代码逆向分析wp/">
-            
-                <span>2018火眼恶意代码逆向分析wp</span>
-        </a>
-        <div class="abstract-content">
-            Challenge 1发现是一个jar文件，那就说明这个题是一个java的反汇编，Java的好处就是你可以直接看到源码，所以分析起来就容易一些。使用Java的反汇编工具jd-gui
-直接看到源码，代码逻辑很简单，拿到flag
-
-‘GoldenTicket2018@flare-on.com’
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="逆向,恶意代码">逆向,恶意代码</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/09/网络层知识总结/">
-            
-                <span>网络层知识总结</span>
-        </a>
-        <div class="abstract-content">
-            网络层重点：虚电路与数据报网络的比较★★★☆☆最短路径算法★★★☆☆距离矢量算法★★★★★链路状态算法★★★★★IPv4协议★★★★★IP地址★★★★★Internet控制协议★★★★★OSPF——内部网关路由协议★★★☆☆Internet编址方式★★★★☆第四章  互联网协议IP★★★★★Internet控制报文协议ICMP★★★★★
-1.网络层的功能：
-
-1.将上层的报文段从源主机传输到目的主机，将报文段封装成分组2.控制子网（路由，拥塞控制，服务质量，网络互连）
-
-2.网络层设计的问题：
-
-1.存储转发数据包交换：LAN，WAN和Int的数据包交换基于分组的存储转发2.提供给传输层...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,网络层">计算机网络,网络层</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/04/windows2018R2读书笔记/">
-            
-                <span>windows2018R2读书笔记</span>
-        </a>
-        <div class="abstract-content">
-            最近在学习内网渗透，发现自己对于这个方向之前有很大的误解，以为用工具扫扫就可以了，没有深入的理解，所以决定从原理上学习Windows的域控。我这次读的书是《Windows Server 2008 R2 Active Directory配置指南》。由于时间有限我只读以下章节：
-第1章  Active Directory域服务（AD DS）第2章  建立AD DS域第3章  域用户与组账户的管理第8章  管理域和林信任第10章  操作主机的管理。下面就是我对一些重要概念的理解，以及自己实践的记录。
-第一章 Active Directory域服务1.1 AD域服务概述Directory Ser...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="windows,域控,内网渗透">windows,域控,内网渗透</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/02/Linux下的iptables详解/">
-            
-                <span>Linux下的iptables详解</span>
-        </a>
-        <div class="abstract-content">
-            最近在写DNS欺骗的小工具，突然遇到了Linux下的iptables，之前没有听过这个，所以专门查了这方面的知识，在这里做一个整理。
-防火墙的概念从逻辑上讲。防火墙可以大体分为主机防火墙和网络防火墙。主机防火墙：针对于单个主机进行防护。网络防火墙：往往处于网络入口或边缘，针对于网络入口进行防护，服务于防火墙背后的本地局域网。网络防火墙和主机防火墙并不冲突，可以理解为，网络防火墙主外（集体）， 主机防火墙主内（个人）。从物理上讲，防火墙可以分为硬件防火墙和软件防火墙。硬件防火墙：在硬件级别实现部分防火墙功能，另一部分功能基于软件实现，性能高，成本高。软件防火墙：应用软件处理逻辑运行于通用硬...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="防火墙,iptables">防火墙,iptables</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/27/自己动手写工具(3)--ARP欺骗/">
-            
-                <span>自己动手写工具(3)--ARP欺骗</span>
-        </a>
-        <div class="abstract-content">
-            最近在计网里学习了ARP协议，为了加深理解，所以决定自己写一个ARP的欺骗工具（有的地方也可以翻译成ARP投毒）。
-##ARP协议首先介绍一下ARP协议的定义，先看一下网络的结构模型
-
-ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路层还是网络层是众说纷纭所以不必纠结这个地方。在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP/IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,arp_poison">工具,python,arp_poison</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/22/使用动态规划-DP-解决最大公共子串与最大公共子序列问题/">
-            
-                <span>使用动态规划(DP)解决最大公共子串与最大公共子序列问题</span>
-        </a>
-        <div class="abstract-content">
-            
-我们从一道题目来引入我们今天的内容首先介绍一下子串和子序列的区别对于两个字符串 ABCDEF BCYHEF子序列为字符串中 一定顺序的字符不一定相连子串为字符串中相连的字符所以他们的最大公共子序列为 BCEF最大公共子串为 BC或者EF那么对于求解最大公共子串和最大公共子序列用什么方法呢，可能我们最开始想到的就是不断的枚举两个的子串或者子序列，再比较哪个最长，这个方法也不是不行，但是对于两个长度分别为n,m的字符串，这个算法的时间复杂为n^m 显然时间复杂度太大，在ACM中这种算法一定会超时的。那么我们怎么优化呢？我们发现在枚举的过程中，其实我们其实一直都在重复一个操作，那就是枚举子串...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="动态规划(DP)">动态规划(DP)</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/22/素数个数求解与素数的判定/">
-            
-                <span>素数个数求解与素数的判定</span>
-        </a>
-        <div class="abstract-content">
-            1.素数质数（Prime number），又称素数，指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数（也可定义为只有1与该数本身两个正因数的数）。对于写代码的人来说，素数比想像中的更重要，Google一下BigPrime或者big_prime你总会发现大堆大堆用到了素数常量的程序代码。平时没事时可以记一些素数下来以 备急用。我会选一些好记的素数，比如4567, 124567, 3214567, 23456789, 55566677, 1234567894987654321, 11111111111111111111111 (23个1)。   　　素数有很多神奇的性质。我...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="概率法求素数,算法">概率法求素数,算法</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/10/自己动手写工具(2)--TCP代理/">
-            
-                <span>自己动手写工具(2)--TCP代理</span>
-        </a>
-        <div class="abstract-content">
-            ##TCP代理的简介这次的博客给大家再介绍一个TCP代理的小工具，TCP代理是什么呢，就是处在应用层上位于真正的服务器和客户端之间用TCP的方式将流量从一个机子转到另一个机子，可以起到监控流量，修改数据包的功能。代理服务器还有一个重要的作用就是隐藏背后的真正服务器，使服务器免受攻击。假如代理服务器挂了，后面的服务器仍然可以正常运行，而且如果背后的服务器还拥有多台代理服务器就会使自己更加安全。
-##实现的原理1.代理先开启一个TCP服务2.客户端先去连接代理3.代理在与客户端取得连接后立即与远程的服务端建立TCP链接4.无论是客户端还是服务端发送数据都是先发送到代理然后代理再决...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具,python,proxy">工具,python,proxy</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/10/CTF中的编码总结/">
-            
-                <span>CTF中的编码总结</span>
-        </a>
-        <div class="abstract-content">
-            这段时间做的web题比较多，遇到了很多编码的题，所以这里总结一下web方向常用到的编码知识
-1.URL编码首先当我们要去学习一个编码的时候需要知道为什么这里需要编码，通常我们编码的原因是：压缩传输，避免敏感信息泄漏，避免引起歧义等。URL编码顾名思义就是在URL里的编码，为什么要使用URL编码主要是为了避免引起歧义，比如我们在发送GET请求时 /?a=123&amp;b=234 这里我们传递了两个整数给变量a,b，看似没有问题，如果我们要传递的数据里有？或者&amp;就会引起歧义，浏览器就不知道怎么解析了，所以引入了URL编码，将会引起歧义的地方换成URL编码。URL编码也叫百分号编码，...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf,web,编码">ctf,web,编码</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="PWN,canary,栈溢出">PWN,canary,栈溢出</a>
     
 </div>
             
@@ -658,10 +375,6 @@ ARP协议就是工作在数据链路层的协议，至于ARP到底属于链路�
     </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">NEXT &#62;</a>
-    </nav>
     
 </main>
             <!-- profile -->

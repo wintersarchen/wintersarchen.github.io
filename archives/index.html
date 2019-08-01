@@ -346,6 +346,40 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/08/01/Pwn-栈溢出与canary/">
+            
+                <span>Pwn--栈溢出与canary</span>
+        </a>
+        <div class="abstract-content">
+            栈溢出
+在计算机安全领域，缓冲区溢出是个古老而经典的话题。栈溢出是指在栈内写入超出长度限制的数据，从而破坏程序运行甚至获得系统控制权的攻击手段。为了实现栈溢出，要满足两个条件。第一，程序要有向栈内写入数据的行为；如gets(),read()等第二，程序并不限制写入数据的长度。
+
+函数调用栈
+
+函数调用栈是指程序运行时内存一段连续的区域，用来保存函数运行时的状态信息，包括函数参数与局部变量等。称之为“栈”是因为发生函数调用时，调用函数（caller）的状态被保存在栈内，被调用函数（callee）的状态被压入调用栈的栈顶；在函数调用结束时，栈顶的函数（callee）状态被弹出，栈顶恢复到调用...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/01</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="PWN,canary,栈溢出">PWN,canary,栈溢出</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/08/01/SSH代理与端口转发/">
             
                 <span>SSH代理与端口转发</span>
@@ -651,42 +685,6 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="逆向,CTF">逆向,CTF</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/11/传输层知识总结/">
-            
-                <span>传输层知识总结</span>
-        </a>
-        <div class="abstract-content">
-            传输层重点：传输层的作用★★端口★★★★UDP的特点★★★UDP报文格式★★TCP的特点★★★套接字★★★★TCP数据报的首部★★★★★TCP可靠传输的基本原理★★★滑动窗口的思想与原理★★★★拥塞控制的基本算法★★★★TCP连接的建立与释放★★★★★TCP中的定时器★★★★
-1.传输服务的功能：
-
-提供给应用的端到端的服务IP地址复用情况下的实体通信增强网络层的服务：可靠传输，流控，拥塞控制
-
-2.引入传输层的必要性：
-
-1.由于IP是无连接的数据报投递系统，所以需要传输层提供服务质量更高的服务。2.传输层要提供识别应用程序的机制，由于IP传递的数据报中写的是目标的IP地址，无法区分...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="计算机网络,传输层">计算机网络,传输层</a>
     
 </div>
             
@@ -1092,9 +1090,30 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 25
+        Total : 26
         </div>
         <!-- search  -->
         
@@ -1107,6 +1126,11 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href="/2019/08/01/Pwn-栈溢出与canary/">Pwn--栈溢出与canary</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1240,15 +1264,17 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
         <span class="sidebar-tag-name" data-tags="逆向,恶意代码"><span class="iconfont-archer">&#xe606;</span>逆向,恶意代码</span>
     
+        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="ctf,web,编码"><span class="iconfont-archer">&#xe606;</span>ctf,web,编码</span>
     
-        <span class="sidebar-tag-name" data-tags="SSH,端口转发"><span class="iconfont-archer">&#xe606;</span>SSH,端口转发</span>
-    
-        <span class="sidebar-tag-name" data-tags="逆向,CTF"><span class="iconfont-archer">&#xe606;</span>逆向,CTF</span>
+        <span class="sidebar-tag-name" data-tags="PWN,canary,栈溢出"><span class="iconfont-archer">&#xe606;</span>PWN,canary,栈溢出</span>
     
         <span class="sidebar-tag-name" data-tags="Linux,LAMP"><span class="iconfont-archer">&#xe606;</span>Linux,LAMP</span>
     
         <span class="sidebar-tag-name" data-tags="防火墙,iptables"><span class="iconfont-archer">&#xe606;</span>防火墙,iptables</span>
+    
+        <span class="sidebar-tag-name" data-tags="SSH,端口转发"><span class="iconfont-archer">&#xe606;</span>SSH,端口转发</span>
     
         <span class="sidebar-tag-name" data-tags="IIS"><span class="iconfont-archer">&#xe606;</span>IIS</span>
     
@@ -1266,9 +1292,9 @@ IIS基本配置点开IIS服务器，点击网站，删除默认的站点，新�
     
         <span class="sidebar-tag-name" data-tags="算法设计"><span class="iconfont-archer">&#xe606;</span>算法设计</span>
     
-        <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
-    
         <span class="sidebar-tag-name" data-tags="工具,python,Netcat"><span class="iconfont-archer">&#xe606;</span>工具,python,Netcat</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具,python,proxy"><span class="iconfont-archer">&#xe606;</span>工具,python,proxy</span>
     
         <span class="sidebar-tag-name" data-tags="python,多线程"><span class="iconfont-archer">&#xe606;</span>python,多线程</span>
     
@@ -1321,9 +1347,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="CTFweb"><span class="iconfont-archer">&#xe60a;</span>CTFweb</span>
     
-        <span class="sidebar-category-name" data-categories="内网渗透"><span class="iconfont-archer">&#xe60a;</span>内网渗透</span>
+        <span class="sidebar-category-name" data-categories="Pwn"><span class="iconfont-archer">&#xe60a;</span>Pwn</span>
     
         <span class="sidebar-category-name" data-categories="Linux"><span class="iconfont-archer">&#xe60a;</span>Linux</span>
+    
+        <span class="sidebar-category-name" data-categories="内网渗透"><span class="iconfont-archer">&#xe60a;</span>内网渗透</span>
     
         <span class="sidebar-category-name" data-categories="社工"><span class="iconfont-archer">&#xe60a;</span>社工</span>
     
